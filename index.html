@@ -163,22 +163,19 @@ button{font:inherit;color:inherit}
 .arena{position:relative;height:320px;border:1px solid #3a1208;box-shadow:0 0 30px rgba(196,64,29,.25) inset;background:#140403;overflow:hidden;border-radius:2px;touch-action:manipulation}
 .arena .web{position:absolute;right:-20px;top:-20px;width:140px;opacity:.22;pointer-events:none}
 .arena-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.arena-bg .fl{transform-box:fill-box;transform-origin:50% 100%;animation:lick 1s ease-in-out infinite alternate}
-.arena-bg .fl:nth-child(2n){animation-duration:.75s;animation-delay:-.3s}
-.arena-bg .fl:nth-child(3n){animation-duration:1.3s;animation-delay:-.5s}
-.arena-bg .ember{animation:rise3 4.5s linear infinite}
-.arena-bg .ember:nth-child(2n){animation-duration:6s;animation-delay:-2s}
+.arena::after{content:"";position:absolute;left:0;right:0;bottom:0;height:45%;pointer-events:none;background:radial-gradient(70% 90% at 50% 100%, rgba(255,140,50,.35), transparent 70%);animation:glowflick 1.6s ease-in-out infinite alternate;will-change:opacity}
+@keyframes glowflick{0%{opacity:.4}40%{opacity:.9}70%{opacity:.6}100%{opacity:1}}
 @keyframes rise3{from{transform:translateY(0);opacity:1}to{transform:translateY(-260px);opacity:0}}
-.arena-bg .awaves{animation:drift 3s linear infinite}
 .taunt{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;text-align:center;font-family:var(--font-mono);font-size:.85rem;line-height:1.35;color:var(--candle);min-height:1.2em;pointer-events:none;text-wrap:balance;text-shadow:0 1px 3px #000}
 .taunt:not(:empty){background:rgba(12,3,2,.78);padding:6px 10px;border-radius:2px}
 .taunt[data-kind="no"]{color:#ff7a5c;text-shadow:0 0 10px rgba(163,54,31,.8)}
-.ghost,.spider{position:absolute;z-index:1;border:0;background:none;padding:0;cursor:pointer;touch-action:none}
-.ghost{width:118px;transition:left 2.6s ease-in-out, top 2.6s ease-in-out}
-.ghost svg{display:block;width:100%;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(255,122,46,.45))}
+.ghost,.spider{position:absolute;left:0;top:0;z-index:1;will-change:transform;border:0;background:none;padding:0;cursor:pointer;touch-action:none}
+.ghost{width:118px;transition:transform 2.6s ease-in-out}
+.ghost::before,.spider::before{content:"";position:absolute;inset:-10%;border-radius:50%;background:radial-gradient(closest-side, rgba(255,122,46,.35), transparent);pointer-events:none}
+.ghost svg{display:block;width:100%;position:relative;animation:bob 2.2s ease-in-out infinite;will-change:transform}
 @keyframes bob{50%{transform:translateY(-6px) rotate(-4deg)}}
-.spider{width:116px;transition:left .22s cubic-bezier(.3,1.4,.5,1), top .22s cubic-bezier(.3,1.4,.5,1)}
-.spider svg{display:block;width:100%;position:relative;animation:sway 1.4s ease-in-out infinite;transform-origin:50% 50%;filter:drop-shadow(0 0 8px rgba(196,64,29,.5))}
+.spider{width:116px;transition:transform .22s cubic-bezier(.3,1.4,.5,1)}
+.spider svg{display:block;width:100%;position:relative;animation:sway 1.4s ease-in-out infinite;transform-origin:50% 50%;will-change:transform}
 .spider .heads > g{animation:snap .5s ease-in-out infinite alternate}
 .spider .heads > g:nth-child(2){animation-delay:-.25s}
 @keyframes snap{to{translate:0 -2px}}
@@ -223,15 +220,13 @@ button{font:inherit;color:inherit}
 #scare.done .after{opacity:1}
 .big{font-family:var(--font-title);color:var(--rust);font-size:clamp(1.6rem,7vw,2.4rem);line-height:1.2;text-wrap:balance}
 #party{background:radial-gradient(60% 60% at 50% 45%, #2a1410, var(--pit) 80%)}
-.hell{width:min(94vw,520px);border:1px solid var(--line);box-shadow:0 20px 60px rgba(196,64,29,.25)}
-.hell .ferry{animation:cross 7s ease-in-out infinite alternate}
-.hell .rocker{animation:rock 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
-.hell .pole{animation:push 1.4s ease-in-out infinite;transform-box:fill-box;transform-origin:0 0}
-.hell .waves2{animation:drift 3s linear infinite}
-.hell .flames{animation:fire .5s ease-in-out infinite alternate}
-.hell .embers circle{animation:rise 4s linear infinite}
-.hell .embers circle:nth-child(2n){animation-duration:5.5s;animation-delay:-2s}
-.hell .embers circle:nth-child(3n){animation-duration:3.2s;animation-delay:-1s}
+.hell-wrap{position:relative;width:min(94vw,520px);aspect-ratio:360/280;max-width:100%;border:1px solid var(--line);box-shadow:0 20px 60px rgba(196,64,29,.25);overflow:hidden}
+.hell-bg{display:block;width:100%;height:100%}
+.ferry-layer{position:absolute;inset:0;animation:cross2 7s ease-in-out infinite alternate;will-change:transform}
+.ferry-svg{display:block;width:100%;height:100%;animation:rock2 2.4s ease-in-out infinite;transform-origin:50% 88%;will-change:transform}
+@keyframes cross2{from{transform:translate3d(-19%,0,0)}to{transform:translate3d(14%,0,0)}}
+@keyframes rock2{50%{transform:rotate(-1.5deg) translate3d(0,1%,0)}}
+.hell-wrap::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(80% 40% at 50% 100%, rgba(255,140,50,.25), transparent 70%);animation:glowflick 1.6s ease-in-out infinite alternate;will-change:opacity}
 @keyframes cross{from{transform:translateX(-70px)}to{transform:translateX(50px)}}
 @keyframes rock{50%{transform:rotate(-2.5deg) translateY(2px)}}
 @keyframes push{50%{transform:rotate(14deg)}}
@@ -241,8 +236,9 @@ button{font:inherit;color:inherit}
 footer{text-align:center;color:var(--ash);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
 
 @media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  #scare.go .face{transform:scale(1);opacity:1}
+  /* keep the scene alive, only calm the violent shaking and flicker */
+  #scare.go .face{animation:lunge .5s ease-out forwards}
+  .door-hint,.inscription{animation:none}
 }
 </style>
 </head>
@@ -494,7 +490,8 @@ footer{text-align:center;color:var(--ash);font-family:var(--font-mono);font-size
 
 <!-- Charon -->
 <div class="moment" id="party" hidden aria-live="polite">
-  <svg class="hell" viewBox="0 0 360 280" aria-hidden="true">
+  <div class="hell-wrap">
+  <svg class="hell-bg" viewBox="0 0 360 280" aria-hidden="true">
     <defs>
       <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d0302"/><stop offset=".55" stop-color="#4a0f06"/><stop offset=".72" stop-color="#c4401d"/></linearGradient>
       <linearGradient id="river" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a1608"/><stop offset="1" stop-color="#140504"/></linearGradient>
@@ -512,8 +509,12 @@ footer{text-align:center;color:var(--ash);font-family:var(--font-mono);font-size
       <path d="M-40 244q10-5 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0" opacity=".6"/>
     </g>
     <g class="souls" fill="#efe0c4" opacity=".35"><circle cx="30" cy="206" r="4"/><circle cx="44" cy="208" r="4"/><circle cx="58" cy="205" r="4"/><circle cx="316" cy="208" r="4"/><circle cx="330" cy="206" r="4"/></g>
-    <g class="ferry">
-      <g transform="translate(84 104) scale(1.3)"><g class="rocker">
+    <g class="embers" fill="#ffb347">
+      <circle cx="40" cy="270" r="1.6"/><circle cx="100" cy="275" r="1.2"/><circle cx="170" cy="272" r="1.8"/><circle cx="240" cy="276" r="1.3"/><circle cx="300" cy="271" r="1.7"/><circle cx="340" cy="274" r="1.2"/>
+    </g>
+  </svg>
+  <div class="ferry-layer"><svg class="ferry-svg" viewBox="0 0 360 280" aria-hidden="true"><g class="ferry">
+      <g transform="translate(84 104) scale(1.3)"><g>
         <!-- the pole, planted in the river -->
         <g class="pole"><path d="M108 -34 L124 104" stroke="#5a3a22" stroke-width="3.5" stroke-linecap="round"/></g>
         <!-- Caronte: old, white-haired, eyes like wheels of fire, tattered robe -->
@@ -547,10 +548,8 @@ footer{text-align:center;color:var(--ash);font-family:var(--font-mono);font-size
         <circle cx="2" cy="35" r="7" fill="#ffd27a" opacity=".25"/>
       </g></g>
     </g>
-    <g class="embers" fill="#ffb347">
-      <circle cx="40" cy="270" r="1.6"/><circle cx="100" cy="275" r="1.2"/><circle cx="170" cy="272" r="1.8"/><circle cx="240" cy="276" r="1.3"/><circle cx="300" cy="271" r="1.7"/><circle cx="340" cy="274" r="1.2"/>
-    </g>
-  </svg>
+    </svg></div>
+  </div>
   <div class="after">
     <p class="big" id="party-title">Benvenuto all'Inferno!</p>
     <p>Caronte ti traghetta sull'Acheronte sabato 31 alle 19:00, da Via Antonio Chiesa 8. Ricorda: vesti il tuo peccato.</p>
@@ -708,7 +707,7 @@ $('door').addEventListener('click', () => {
   creak();
   $('door').classList.add('open');
   $('door-screen').classList.add('gone');
-  setTimeout(() => { $('door-screen').hidden = true; document.body.classList.remove('locked'); }, reduceMotion ? 50 : 1900);
+  setTimeout(() => { $('door-screen').hidden = true; document.body.classList.remove('locked'); }, 1900);
 });
 
 /* ===== Countdown ===== */
@@ -730,14 +729,14 @@ const SPIDER_ESCAPES = 5;
 const taunts = ['Mancato! Sei occhi ti hanno visto arrivare da Chiasso.', 'Tre teste, e nessuna ha voglia di sentirti dire di no.', 'Cerbero sbrana i golosi. Tu sei solo lento.', 'Tre teste e quattro zampe. Tu due gambe e zero scuse.', 'E va bene, hai vinto. Ma agli ignavi qualcuno deve pur dare la caccia…'];
 
 function rand(min, max){ return min + Math.random() * (max - min); }
-function place(el, x, y){ el.style.left = x + 'px'; el.style.top = y + 'px'; }
+function place(el, x, y){ el.dataset.x = x; el.dataset.y = y; el.style.transform = `translate3d(${x}px, ${y}px, 0)`; }
 function moveGhost(){
   const w = arena.clientWidth, h = arena.clientHeight;
   place(ghost, rand(8, Math.max(8, w - 124)), rand(10, Math.max(10, h - 110)));
 }
 function placeSpider(far){
   const w = arena.clientWidth, h = arena.clientHeight;
-  const cx = parseFloat(spider.style.left) || 0, cy = parseFloat(spider.style.top) || 0;
+  const cx = parseFloat(spider.dataset.x) || 0, cy = parseFloat(spider.dataset.y) || 0;
   let x, y, tries = 0;
   do { x = rand(8, Math.max(8, w - 120)); y = rand(20, Math.max(20, h - 100)); tries++; }
   while (far && Math.hypot(x - cx, y - cy) < Math.min(w, h) * .5 && tries < 30);
@@ -854,7 +853,7 @@ function showScare(name){
   $('scare-text').textContent = `${name}, chi non viene finisce nel vestibolo con gli ignavi, a correre dietro a un'insegna per l'eternità. Se cambi idea, la porta resta socchiusa.`;
   el.hidden = false; el.classList.remove('done'); void el.offsetWidth; el.classList.add('go');
   scream(); buzz([250, 80, 400]);
-  setTimeout(() => { el.classList.add('done'); $('scare-close').focus(); }, reduceMotion ? 300 : 1700);
+  setTimeout(() => { el.classList.add('done'); $('scare-close').focus(); }, 1700);
 }
 $('scare-close').addEventListener('click', () => { const el = $('scare'); el.hidden = true; el.classList.remove('go', 'done'); });
 function showParty(name){
