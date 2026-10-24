@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Il Girone dei Chiassosi</title>
+<meta name="description" content="Festa di Halloween · Sabato 31 ottobre 2026, ore 19:00 · Via Antonio Chiesa 8, Chiasso · Tema: l'Inferno di Dante">
+<meta name="theme-color" content="#150807">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Il Girone dei Chiassosi 🔥">
+<meta property="og:description" content="Dante ne contò nove. Se n'era scordato uno. Sabato 31 ottobre, ore 19:00 · Chiasso.">
+<meta property="og:image" content="__OG_IMAGE_URL__">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@500;700&display=swap">
+<style>
+/* Layout: the Gate of Hell from Inferno III, read top to bottom on a phone —
+   the gate opens onto a manuscript-style poster, a pass, the nine circles, then two "canti" to play. */
+:root{
+  --pit:#140605;        /* the dark beyond the gate */
+  --blood:#2c100d;      /* dried-blood ground */
+  --bone:#efe0c4;       /* text, like old poster paper */
+  --ash:#ab937b;        /* secondary text */
+  --candle:#f2a93b;     /* flame accent */
+  --rust:#c4401d;       /* hellfire red */
+  --ember:#ff7a2e;      /* glowing coal */
+  --line:rgba(239,224,196,.18);
+  --font-title:'Cinzel Decorative','Cinzel','Trajan Pro',Georgia,serif;
+  --font-body:'IM Fell English',Georgia,'Times New Roman',serif;
+  --font-mono:'Cinzel','Trajan Pro',Georgia,serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--pit)}
+body{
+  margin:0;min-height:100vh;color:var(--bone);font-family:var(--font-body);font-size:18px;line-height:1.5;
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(242,169,59,.16), transparent 60%),
+    radial-gradient(100% 80% at 50% 120%, rgba(163,54,31,.22), transparent 60%),
+    linear-gradient(var(--blood), var(--pit));
+  background-attachment:fixed;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-tap-highlight-color:transparent;
+}
+body.locked{overflow:hidden}
+.wrap{max-width:34rem;margin:0 auto;padding-block:calc(28px + env(safe-area-inset-top,0px)) calc(48px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:44px}
+.label{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--ash)}
+h2{font-family:var(--font-mono);font-weight:400;font-size:1.25rem;letter-spacing:.06em;text-transform:uppercase;margin:0;color:var(--candle);text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px dashed var(--candle);outline-offset:3px}
+
+/* ---------- Door ---------- */
+#door-screen{position:fixed;inset:0;z-index:50;overflow:hidden;background:linear-gradient(#0c0302 0%, #2a0805 55%, #6a1606 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;transition:opacity .6s ease 1.2s}
+#door-screen.gone{opacity:0;pointer-events:none}
+#door-screen > :not(.hellbg){position:relative;z-index:1}
+.hellbg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.hellbg .fl{transform-box:fill-box;transform-origin:50% 100%;animation:lick 1.1s ease-in-out infinite alternate}
+.hellbg .fl:nth-child(2n){animation-duration:.8s;animation-delay:-.3s}
+.hellbg .fl:nth-child(3n){animation-duration:1.4s;animation-delay:-.6s}
+@keyframes lick{0%{transform:scaleY(.82) skewX(-4deg)}100%{transform:scaleY(1.12) skewX(5deg)}}
+.hellbg .glow-eye{animation:blink 4s infinite}
+@keyframes blink{0%,46%,54%,100%{opacity:1}50%{opacity:.1}}
+.hellbg .flyer{animation:fly 9s linear infinite}
+.hellbg .flyer:nth-of-type(2){animation-duration:13s;animation-delay:-5s}
+.hellbg .flyer:nth-of-type(3){animation-duration:11s;animation-delay:-8s}
+@keyframes fly{from{transform:translateX(-80px)}to{transform:translateX(480px)}}
+.hellbg .wingflap{transform-box:fill-box;transform-origin:50% 50%;animation:flap .25s steps(2) infinite}
+.hellbg .ember{animation:rise2 5s linear infinite}
+.hellbg .ember:nth-child(2n){animation-duration:7s;animation-delay:-3s}
+.hellbg .ember:nth-child(3n){animation-duration:4s;animation-delay:-1.5s}
+@keyframes rise2{from{transform:translateY(0);opacity:1}to{transform:translateY(-520px);opacity:0}}
+.hellbg .tail{transform-box:fill-box;transform-origin:0 100%;animation:sway2 3s ease-in-out infinite alternate}
+@keyframes sway2{to{transform:rotate(8deg)}}
+.door-shade{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(40% 32% at 50% 48%, rgba(10,3,2,.5), transparent 70%)}
+.inscription{margin:0;text-align:center;font-family:var(--font-mono);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:clamp(.66rem,3.1vw,.86rem);line-height:1.7;background:linear-gradient(180deg,#ffe2a0 0%,#ffb347 40%,#e0561e 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 6px rgba(255,122,46,.55)) drop-shadow(0 2px 0 rgba(0,0,0,.8));animation:glowtxt 2.8s ease-in-out infinite alternate}
+.inscription em{font-style:normal;font-size:1.12em;letter-spacing:.06em;background:linear-gradient(180deg,#ff8a4a,#c4401d);-webkit-background-clip:text;background-clip:text}
+@keyframes glowtxt{to{filter:drop-shadow(0 0 12px rgba(255,122,46,.85)) drop-shadow(0 2px 0 rgba(0,0,0,.8))}}
+.door-top{font-family:var(--font-mono);letter-spacing:.2em;text-transform:uppercase;font-size:.8rem;color:var(--ash);text-align:center}
+@keyframes fire{to{filter:brightness(1.25) saturate(1.2)}}
+/* Gate of Hell: stone portal (SVG) around a heavy iron double door */
+.portal{position:relative;width:min(280px,70vw);aspect-ratio:300/430;max-width:100%;filter:sepia(.2) saturate(.9) brightness(1.08);-webkit-mask-image:radial-gradient(85% 80% at 50% 52%, #000 70%, transparent 100%);mask-image:radial-gradient(85% 80% at 50% 52%, #000 70%, transparent 100%)}
+.portal .stone{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.gate{position:absolute;left:19.33%;width:61.33%;top:22.8%;height:72.6%;border-radius:50% 50% 0 0 / 29% 29% 0 0;overflow:hidden;perspective:700px;background:#120403}
+.gate .beam{position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 80%, #ffe08a, var(--ember) 35%, var(--rust) 65%, #3a0a05 100%);animation:fire 1.2s ease-in-out infinite alternate}
+.door{position:absolute;inset:0;border:0;padding:0;background:none;cursor:pointer;transform-style:preserve-3d}
+.leaf{position:absolute;top:0;bottom:0;width:50%;transition:transform 1.6s cubic-bezier(.55,.05,.3,1);
+  background:
+    radial-gradient(circle at 50% 50%, #8a7868 0 1.6px, #2a221c 2.2px, transparent 2.8px) 6px 8px/22px 26px,
+    repeating-linear-gradient(90deg, transparent 0 9px, rgba(120,48,16,.28) 9px 11px, transparent 11px 23px, rgba(90,36,12,.22) 23px 24px, transparent 24px 31px),
+    radial-gradient(55% 45% at 25% 75%, rgba(130,52,18,.6), transparent 70%),
+    radial-gradient(45% 35% at 75% 25%, rgba(120,46,16,.5), transparent 70%),
+    radial-gradient(30% 20% at 60% 60%, rgba(10,6,4,.7), transparent 70%),
+    linear-gradient(transparent 0 14%, #0c0908 14% 18%, transparent 18% 48%, #0c0908 48% 52%, transparent 52% 82%, #0c0908 82% 86%, transparent 86%),
+    linear-gradient(90deg, #4a423d, #322b27 45%, #443b35 70%, #2e2824);
+  box-shadow:inset 0 0 26px rgba(0,0,0,.85)}
+.leaf.l{left:0;transform-origin:left center;border-right:2px solid #0a0a0b}
+.leaf.r{right:0;transform-origin:right center;border-left:2px solid #2a2420;transform:rotateY(4deg)}
+.leaf.l{transform:rotateY(-2deg)}
+.leaf::before{content:"";position:absolute;inset:8px;border:3px solid #0c0908;box-shadow:inset 0 0 0 1px rgba(255,200,150,.03)}
+.leaf::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18%;background:linear-gradient(transparent, rgba(8,4,2,.55))}
+.knocker{position:absolute;top:50%;width:26px;height:26px;margin-top:-8px}
+.leaf.l .knocker{right:8px}.leaf.r .knocker{left:8px}
+.knocker::before{content:"";position:absolute;left:50%;top:-12px;width:16px;height:16px;margin-left:-8px;border-radius:50% 50% 45% 45%;background:radial-gradient(circle at 35% 45%, #ff3a12 0 1.4px, transparent 1.8px), radial-gradient(circle at 65% 45%, #ff3a12 0 1.4px, transparent 1.8px), radial-gradient(circle at 40% 30%, #5e5040, #2a2016 75%);box-shadow:0 1px 2px #000}
+.leaf.r .knocker::after{display:none}
+.knocker::after{content:"";position:absolute;inset:4px 2px 0;border:3px solid #5a4a30;border-radius:50%;box-shadow:0 2px 3px rgba(0,0,0,.6)}
+.door.open .leaf.l{transform:rotateY(-100deg)}
+.door.open .leaf.r{transform:rotateY(100deg)}
+.plaque{position:relative;margin:-6px 0 0;padding:10px 18px 11px;max-width:min(330px,88vw);text-align:center;font-family:var(--font-mono);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(.58rem,2.7vw,.74rem);line-height:1.55;color:#1a0f0b;text-shadow:0 1px 0 rgba(255,230,200,.35);background:radial-gradient(40% 60% at 85% 25%, rgba(0,0,0,.22), transparent 70%),radial-gradient(30% 50% at 12% 85%, rgba(50,70,30,.3), transparent 70%),linear-gradient(170deg,#a8968a,#8a786b 60%,#74645a);clip-path:polygon(2% 10%, 9% 0, 52% 4%, 58% 0, 97% 3%, 100% 40%, 98% 88%, 90% 100%, 40% 96%, 33% 100%, 4% 97%, 0 60%);transform:rotate(-1.2deg);filter:sepia(.2)}
+.plaque em{font-style:normal;color:#7a1508}
+.torch{transform-box:fill-box;transform-origin:50% 100%;animation:lick .6s ease-in-out infinite alternate}
+.door-hint{font-style:italic;color:var(--bone);font-size:1.05rem;text-align:center;animation:flicker 3.2s infinite}
+@keyframes flicker{0%,100%{opacity:1}46%{opacity:1}48%{opacity:.35}50%{opacity:.9}52%{opacity:.4}54%{opacity:1}}
+
+/* ---------- Poster ---------- */
+.poster{display:flex;flex-direction:column;gap:18px;text-align:center;align-items:center}
+.presents{font-family:var(--font-mono);letter-spacing:.3em;text-transform:uppercase;font-size:.8rem;color:var(--ash)}
+.title{font-family:var(--font-title);font-weight:400;color:var(--ember);font-size:clamp(2.1rem,10vw,3.4rem);font-weight:900;letter-spacing:.01em;line-height:1.1;margin:0;text-wrap:balance;background:linear-gradient(180deg,#ffd27a 10%,var(--ember) 50%,var(--rust) 90%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 18px rgba(196,64,29,.45))}
+.verse{display:flex;flex-direction:column;gap:2px;align-items:center}
+.verse cite{font-family:var(--font-mono);font-style:normal;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash)}
+.quote{font-style:italic;font-size:1rem;line-height:1.35;color:var(--ash);margin:0}
+.tagline{font-style:italic;font-size:1.15rem;line-height:1.35;color:var(--bone);max-width:24rem}
+.summons{margin:4px 0 0;font-family:var(--font-mono);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:clamp(.8rem,3.6vw,1rem);line-height:1.6;color:var(--candle);text-wrap:balance}
+.stamp{display:inline-block;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.18em;font-size:.75rem;color:var(--candle);border:2px solid var(--candle);padding:4px 10px;transform:rotate(-4deg);opacity:.9}
+.countdown{font-family:var(--font-mono);color:var(--ash);font-size:.85rem;font-variant-numeric:tabular-nums}
+
+/* ---------- Ticket ---------- */
+.ticket{position:relative;background:var(--bone);color:#2a110c;padding:22px 22px 20px;display:grid;gap:14px;
+  -webkit-mask:radial-gradient(circle 12px at 0 62%, transparent 11px, #000 12px) left/51% 100% no-repeat, radial-gradient(circle 12px at 100% 62%, transparent 11px, #000 12px) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 12px at 0 62%, transparent 11px, #000 12px) left/51% 100% no-repeat, radial-gradient(circle 12px at 100% 62%, transparent 11px, #000 12px) right/51% 100% no-repeat;
+  transform:rotate(-.6deg);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.ticket .head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px dashed rgba(42,17,12,.35);padding-bottom:10px}
+.ticket .head span{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.14em;font-size:.75rem}
+.ticket .head strong{font-family:var(--font-mono);font-weight:400;font-size:.75rem;color:var(--rust);letter-spacing:.1em}
+.row{display:grid;grid-template-columns:5.6rem 1fr;gap:10px;align-items:baseline}
+.row .k{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:#7a4a3a}
+.row .v{font-size:1.15rem;line-height:1.3;min-width:0}
+.row .v a{color:var(--rust);font-family:var(--font-mono);font-size:.8rem;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px;display:inline-block;margin-top:4px}
+.ticket .foot{border-top:2px dashed rgba(42,17,12,.35);padding-top:10px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#7a4a3a;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+/* ---------- Sections ---------- */
+.scene{display:flex;flex-direction:column;gap:14px}
+.scene-head{display:flex;flex-direction:column;gap:4px}
+.dress p{color:var(--bone)}
+.incipit{font-size:1.12rem;line-height:1.55;color:var(--bone);max-width:30rem;text-align:left;margin:6px 0 0}
+.decree{margin:0;font-style:italic;font-size:1.2rem;line-height:1.5;color:var(--candle);border-left:2px solid var(--rust);padding-left:14px}
+.incipit::first-letter{font-family:var(--font-title);font-size:2.6em;float:left;line-height:.9;margin:4px 8px 0 0;color:var(--ember)}
+.dress .alt{color:var(--ash);font-style:italic}
+
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;color:var(--ash)}
+.field input{width:100%;font:inherit;font-size:1.1rem;color:var(--bone);background:rgba(0,0,0,.35);border:1px solid var(--line);border-bottom:2px solid var(--candle);padding:10px 12px;border-radius:2px}
+.field input::placeholder{color:rgba(171,147,123,.6)}
+.shake{animation:shake .4s}
+@keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+
+.arena{position:relative;height:320px;border:1px solid #3a1208;box-shadow:0 0 30px rgba(196,64,29,.25) inset;background:#140403;overflow:hidden;border-radius:2px;touch-action:manipulation}
+.arena .web{position:absolute;right:-20px;top:-20px;width:140px;opacity:.22;pointer-events:none}
+.arena-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.arena-bg .fl{transform-box:fill-box;transform-origin:50% 100%;animation:lick 1s ease-in-out infinite alternate}
+.arena-bg .fl:nth-child(2n){animation-duration:.75s;animation-delay:-.3s}
+.arena-bg .fl:nth-child(3n){animation-duration:1.3s;animation-delay:-.5s}
+.arena-bg .ember{animation:rise3 4.5s linear infinite}
+.arena-bg .ember:nth-child(2n){animation-duration:6s;animation-delay:-2s}
+@keyframes rise3{from{transform:translateY(0);opacity:1}to{transform:translateY(-260px);opacity:0}}
+.arena-bg .awaves{animation:drift 3s linear infinite}
+.taunt{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;text-align:center;font-family:var(--font-mono);font-size:.85rem;line-height:1.35;color:var(--candle);min-height:1.2em;pointer-events:none;text-wrap:balance;text-shadow:0 1px 3px #000}
+.taunt:not(:empty){background:rgba(12,3,2,.78);padding:6px 10px;border-radius:2px}
+.taunt[data-kind="no"]{color:#ff7a5c;text-shadow:0 0 10px rgba(163,54,31,.8)}
+.ghost,.spider{position:absolute;z-index:1;border:0;background:none;padding:0;cursor:pointer;touch-action:none}
+.ghost{width:118px;transition:left 2.6s ease-in-out, top 2.6s ease-in-out}
+.ghost svg{display:block;width:100%;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(255,122,46,.45))}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-4deg)}}
+.spider{width:116px;transition:left .22s cubic-bezier(.3,1.4,.5,1), top .22s cubic-bezier(.3,1.4,.5,1)}
+.spider svg{display:block;width:100%;position:relative;animation:sway 1.4s ease-in-out infinite;transform-origin:50% 50%;filter:drop-shadow(0 0 8px rgba(196,64,29,.5))}
+.spider .heads > g{animation:snap .5s ease-in-out infinite alternate}
+.spider .heads > g:nth-child(2){animation-delay:-.25s}
+@keyframes snap{to{translate:0 -2px}}
+@keyframes sway{50%{transform:translateY(-4px) rotate(4deg)}}
+.arena.disabled .ghost,.arena.disabled .spider{opacity:.35}
+
+.status{border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:10px;background:rgba(0,0,0,.25)}
+.status strong{color:var(--candle);font-weight:400;font-family:var(--font-mono);letter-spacing:.06em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2px solid var(--candle);background:transparent;color:var(--candle);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.12em;font-size:.85rem;padding:10px 16px;cursor:pointer;border-radius:2px;align-self:flex-start}
+.btn:hover{background:rgba(242,169,59,.12)}
+.btn.solid{background:var(--candle);color:#2a110c}
+.err{color:#ff9a7a;font-size:.95rem}
+
+/* ---------- Bat game ---------- */
+.batfield{position:relative;height:280px;border:1px dashed var(--line);background:linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.45));overflow:hidden;border-radius:2px;touch-action:manipulation}
+.moon{position:absolute;left:0;right:0;bottom:0;height:60px;background:radial-gradient(60% 100% at 50% 100%, rgba(255,122,46,.45), transparent 70%);pointer-events:none;animation:fire 1.4s ease-in-out infinite alternate}
+.hud{position:absolute;left:12px;top:10px;font-family:var(--font-mono);font-size:.9rem;color:var(--bone);font-variant-numeric:tabular-nums;display:flex;gap:16px;pointer-events:none}
+.bat{position:absolute;left:0;top:0;width:72px;height:60px;border:0;background:none;padding:8px;cursor:crosshair;touch-action:none;will-change:transform}
+.bat svg{width:100%;height:100%;display:block;filter:drop-shadow(0 0 4px rgba(255,122,46,.55))}
+.bat.flap .wings{animation:flap .16s steps(2) infinite;transform-origin:32px 22px}
+@keyframes flap{50%{transform:scaleY(.5)}}
+.bat.hit svg{transform:scale(1.3) rotate(25deg);opacity:0;transition:transform .25s, opacity .25s}
+.overlay-msg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:16px;background:rgba(10,4,3,.6)}
+.overlay-msg p{max-width:22rem}
+.guests{display:flex;flex-direction:column;gap:12px}
+.guests .count{font-family:var(--font-mono);color:var(--candle);letter-spacing:.06em}
+.guests ol{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.guests li{border:1px solid var(--line);padding:4px 10px;background:rgba(239,224,196,.06);font-size:1.05rem}
+.guests .note{color:var(--ash);font-size:.9rem;font-style:italic}
+
+/* ---------- Full-screen moments ---------- */
+.moment{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:calc(24px + env(safe-area-inset-top,0px)) max(20px, env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px, env(safe-area-inset-left,0px));text-align:center}
+#scare{background:radial-gradient(60% 60% at 50% 50%, #3a0b07, #000 80%)}
+#scare .face{width:min(96vw,480px);transform:scale(.2);opacity:0}
+#scare.go .face{animation:lunge .5s cubic-bezier(.2,1.6,.4,1) forwards, jitter .09s linear .5s 10}
+@keyframes lunge{to{transform:scale(1.15);opacity:1}}
+@keyframes jitter{0%{transform:scale(1.15) translate(0,0)}25%{transform:scale(1.17) translate(-4px,3px)}50%{transform:scale(1.14) translate(3px,-3px)}75%{transform:scale(1.16) translate(-2px,-4px)}100%{transform:scale(1.15) translate(0,0)}}
+#scare .after,#party .after{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:24rem}
+#scare .after{opacity:0;transition:opacity .5s}
+.moment .btn{align-self:center}
+#scare.done .face{animation:none;transform:scale(.55);opacity:.5;transition:transform .5s, opacity .5s}
+#scare.done .after{opacity:1}
+.big{font-family:var(--font-title);color:var(--rust);font-size:clamp(1.6rem,7vw,2.4rem);line-height:1.2;text-wrap:balance}
+#party{background:radial-gradient(60% 60% at 50% 45%, #2a1410, var(--pit) 80%)}
+.hell{width:min(94vw,520px);border:1px solid var(--line);box-shadow:0 20px 60px rgba(196,64,29,.25)}
+.hell .ferry{animation:cross 7s ease-in-out infinite alternate}
+.hell .rocker{animation:rock 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+.hell .pole{animation:push 1.4s ease-in-out infinite;transform-box:fill-box;transform-origin:0 0}
+.hell .waves2{animation:drift 3s linear infinite}
+.hell .flames{animation:fire .5s ease-in-out infinite alternate}
+.hell .embers circle{animation:rise 4s linear infinite}
+.hell .embers circle:nth-child(2n){animation-duration:5.5s;animation-delay:-2s}
+.hell .embers circle:nth-child(3n){animation-duration:3.2s;animation-delay:-1s}
+@keyframes cross{from{transform:translateX(-70px)}to{transform:translateX(50px)}}
+@keyframes rock{50%{transform:rotate(-2.5deg) translateY(2px)}}
+@keyframes push{50%{transform:rotate(14deg)}}
+@keyframes drift{to{transform:translateX(-40px)}}
+@keyframes rise{from{transform:translateY(0);opacity:1}to{transform:translateY(-200px);opacity:0}}
+
+footer{text-align:center;color:var(--ash);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  #scare.go .face{transform:scale(1);opacity:1}
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- The door -->
+<div id="door-screen">
+  <svg class="hellbg" viewBox="0 0 400 800" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs><radialGradient id="lava" cx="50%" cy="100%" r="70%"><stop offset="0" stop-color="#ff7a2e" stop-opacity=".55"/><stop offset="1" stop-color="#ff7a2e" stop-opacity="0"/></radialGradient></defs>
+    <rect width="400" height="800" fill="url(#lava)"/>
+    <!-- distant cliffs -->
+    <path d="M0 560 L30 520 L52 540 L80 470 L104 500 L128 455 L150 500 L0 600 Z" fill="#1a0604"/>
+    <path d="M400 560 L372 515 L350 535 L322 465 L300 498 L276 450 L254 500 L400 600 Z" fill="#1a0604"/>
+    <!-- flying devils -->
+    <g fill="#0c0302">
+      <g class="flyer"><g transform="translate(0 120)"><path class="wingflap" d="M-14 0 Q-30 -14 -40 -6 Q-30 -4 -28 4 Q-20 0 -14 6 Z M14 0 Q30 -14 40 -6 Q30 -4 28 4 Q20 0 14 6 Z"/><circle r="9"/><path d="M-6 -7 L-9 -16 L-2 -9 Z M6 -7 L9 -16 L2 -9 Z"/><circle cx="-3" cy="-1" r="1.6" fill="#ff3a12"/><circle cx="3" cy="-1" r="1.6" fill="#ff3a12"/><path d="M0 9 q4 10 10 8 l-2 5" stroke="#0c0302" stroke-width="2" fill="none"/></g></g>
+      <g class="flyer"><g transform="translate(0 200) scale(.7)"><path class="wingflap" d="M-14 0 Q-30 -14 -40 -6 Q-30 -4 -28 4 Q-20 0 -14 6 Z M14 0 Q30 -14 40 -6 Q30 -4 28 4 Q20 0 14 6 Z"/><circle r="9"/><path d="M-6 -7 L-9 -16 L-2 -9 Z M6 -7 L9 -16 L2 -9 Z"/><circle cx="-3" cy="-1" r="1.6" fill="#ff3a12"/><circle cx="3" cy="-1" r="1.6" fill="#ff3a12"/></g></g>
+      <g class="flyer"><g transform="translate(0 70) scale(.5)"><path class="wingflap" d="M-14 0 Q-30 -14 -40 -6 Q-30 -4 -28 4 Q-20 0 -14 6 Z M14 0 Q30 -14 40 -6 Q30 -4 28 4 Q20 0 14 6 Z"/><circle r="9"/><circle cx="-3" cy="-1" r="1.6" fill="#ff3a12"/><circle cx="3" cy="-1" r="1.6" fill="#ff3a12"/></g></g>
+    </g>
+    <!-- Cerberus, bottom left -->
+    <g fill="#0a0202" transform="translate(-6 600)">
+      <path d="M0 200 Q10 110 60 96 L120 96 Q150 120 150 200 Z"/>
+      <g transform="translate(36 92) rotate(-20)"><path d="M-16 -10 L-12 -36 L-2 -16 Z M16 -10 L12 -36 L2 -16 Z"/><ellipse cy="-2" rx="20" ry="18"/><path d="M-4 10 L30 14 L-2 22 Z"/></g>
+      <g transform="translate(78 74)"><path d="M-18 -12 L-14 -42 L-3 -18 Z M18 -12 L14 -42 L3 -18 Z"/><ellipse cy="-2" rx="23" ry="21"/><path d="M-14 12 L0 34 L14 12 Z"/></g>
+      <g transform="translate(122 92) rotate(20)"><path d="M-16 -10 L-12 -36 L-2 -16 Z M16 -10 L12 -36 L2 -16 Z"/><ellipse cy="-2" rx="20" ry="18"/><path d="M4 10 L-30 14 L2 22 Z"/></g>
+      <g class="glow-eye" fill="#ff3a12"><circle cx="30" cy="86" r="2.6"/><circle cx="42" cy="84" r="2.6"/><circle cx="71" cy="68" r="3"/><circle cx="85" cy="68" r="3"/><circle cx="116" cy="84" r="2.6"/><circle cx="128" cy="86" r="2.6"/></g>
+    </g>
+    <!-- demon with pitchfork, bottom right -->
+    <g fill="#0a0202" transform="translate(300 560)">
+      <path d="M-50 40 Q-80 0 -100 10 Q-82 20 -84 40 Q-70 34 -58 52 Z M50 40 Q80 0 100 10 Q82 20 84 40 Q70 34 58 52 Z"/>
+      <path d="M-28 240 Q-34 120 -20 80 Q0 64 20 80 Q34 120 28 240 Z"/>
+      <circle cx="0" cy="56" r="22"/>
+      <path d="M-14 40 Q-26 22 -18 10 Q-12 26 -6 36 Z M14 40 Q26 22 18 10 Q12 26 6 36 Z"/>
+      <g class="glow-eye" fill="#ffb347"><path d="M-11 54 l8 2 -8 3z M11 54 l-8 2 8 3z"/></g>
+      <path d="M44 -10 V240" stroke="#0a0202" stroke-width="5"/>
+      <path d="M30 -10 V8 Q44 20 58 8 V-10 M44 -24 V8" stroke="#0a0202" stroke-width="5" fill="none"/>
+      <path d="M20 96 L44 90" stroke="#0a0202" stroke-width="9" stroke-linecap="round"/>
+    </g>
+    <!-- serpent tail coiling up (Gerione) -->
+    <path class="tail" d="M330 800 Q300 740 340 720 Q380 700 360 660 Q344 630 372 610 l10 -16 2 20" stroke="#0a0202" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <!-- flames -->
+    <g><path class="fl" d="M-33 800 Q-33 731 -11 704 Q-6 683 -3 662 Q10 717 21 752 Q21 779 21 800 Z" fill="#a3280c"/><path class="fl" d="M1 800 Q1 735 20 708 Q25 689 27 669 Q39 721 48 754 Q48 780 48 800 Z" fill="#a3280c"/><path class="fl" d="M47 800 Q47 761 62 746 Q66 734 68 722 Q77 753 85 773 Q85 788 85 800 Z" fill="#a3280c"/><path class="fl" d="M73 800 Q73 735 88 708 Q91 689 93 669 Q102 721 110 754 Q110 780 110 800 Z" fill="#a3280c"/><path class="fl" d="M94 800 Q94 733 114 706 Q119 686 122 666 Q134 720 145 753 Q145 780 145 800 Z" fill="#7a1a08"/><path class="fl" d="M142 800 Q142 764 157 749 Q160 738 162 728 Q171 757 179 775 Q179 789 179 800 Z" fill="#7a1a08"/><path class="fl" d="M171 800 Q171 750 187 730 Q192 715 194 700 Q204 740 213 765 Q213 785 213 800 Z" fill="#a3280c"/><path class="fl" d="M192 800 Q192 744 214 721 Q219 705 222 688 Q235 733 246 761 Q246 783 246 800 Z" fill="#a3280c"/><path class="fl" d="M221 800 Q221 751 242 732 Q247 717 250 702 Q263 741 273 766 Q273 785 273 800 Z" fill="#a3280c"/><path class="fl" d="M261 800 Q261 728 280 699 Q284 677 286 656 Q298 714 307 750 Q307 778 307 800 Z" fill="#7a1a08"/><path class="fl" d="M274 800 Q274 725 297 695 Q303 673 305 651 Q320 710 331 748 Q331 778 331 800 Z" fill="#7a1a08"/><path class="fl" d="M313 800 Q313 729 336 701 Q342 680 345 658 Q360 715 372 750 Q372 779 372 800 Z" fill="#a3280c"/><path class="fl" d="M349 800 Q349 729 365 700 Q369 679 371 657 Q382 714 390 750 Q390 779 390 800 Z" fill="#a3280c"/><path class="fl" d="M373 800 Q373 730 396 702 Q401 680 404 659 Q418 716 430 751 Q430 779 430 800 Z" fill="#a3280c"/></g>
+    <g><path class="fl" d="M-7 800 Q-7 747 4 725 Q7 709 9 693 Q16 736 21 763 Q21 784 21 800 Z" fill="#c4401d"/><path class="fl" d="M1 800 Q1 770 17 758 Q21 749 23 740 Q34 764 42 779 Q42 791 42 800 Z" fill="#e0561e"/><path class="fl" d="M29 800 Q29 769 40 756 Q43 747 44 737 Q51 762 57 778 Q57 791 57 800 Z" fill="#c4401d"/><path class="fl" d="M58 800 Q58 756 74 738 Q79 725 81 712 Q91 747 99 769 Q99 787 99 800 Z" fill="#e0561e"/><path class="fl" d="M79 800 Q79 762 92 746 Q95 735 96 723 Q104 754 111 773 Q111 788 111 800 Z" fill="#c4401d"/><path class="fl" d="M102 800 Q102 764 119 750 Q124 739 126 728 Q136 757 145 775 Q145 789 145 800 Z" fill="#e0561e"/><path class="fl" d="M125 800 Q125 748 137 728 Q140 712 141 697 Q149 738 155 764 Q155 785 155 800 Z" fill="#c4401d"/><path class="fl" d="M144 800 Q144 774 157 764 Q160 756 162 749 Q170 769 177 782 Q177 792 177 800 Z" fill="#c4401d"/><path class="fl" d="M170 800 Q170 764 185 750 Q188 739 190 728 Q199 757 206 775 Q206 789 206 800 Z" fill="#c4401d"/><path class="fl" d="M203 800 Q203 762 216 746 Q220 735 221 723 Q230 754 237 773 Q237 788 237 800 Z" fill="#e0561e"/><path class="fl" d="M218 800 Q218 764 236 750 Q240 739 242 729 Q253 757 262 775 Q262 789 262 800 Z" fill="#e0561e"/><path class="fl" d="M234 800 Q234 752 249 733 Q253 719 255 705 Q265 743 273 767 Q273 786 273 800 Z" fill="#e0561e"/><path class="fl" d="M269 800 Q269 768 282 755 Q285 745 286 735 Q294 761 301 777 Q301 790 301 800 Z" fill="#e0561e"/><path class="fl" d="M289 800 Q289 750 303 730 Q306 715 308 700 Q316 740 323 765 Q323 785 323 800 Z" fill="#e0561e"/><path class="fl" d="M317 800 Q317 761 332 746 Q336 734 338 722 Q347 753 354 773 Q354 788 354 800 Z" fill="#e0561e"/><path class="fl" d="M336 800 Q336 768 349 756 Q353 746 354 737 Q363 762 369 778 Q369 791 369 800 Z" fill="#c4401d"/><path class="fl" d="M362 800 Q362 757 378 739 Q382 726 385 713 Q395 748 403 770 Q403 787 403 800 Z" fill="#e0561e"/><path class="fl" d="M377 800 Q377 746 393 725 Q397 709 399 693 Q409 736 417 762 Q417 784 417 800 Z" fill="#e0561e"/></g>
+    <g><path class="fl" d="M-16 800 Q-16 774 -7 764 Q-4 756 -3 748 Q3 769 8 782 Q8 792 8 800 Z" fill="#ffd27a"/><path class="fl" d="M5 800 Q5 773 16 763 Q19 755 20 747 Q27 768 32 781 Q32 792 32 800 Z" fill="#ffa53a"/><path class="fl" d="M19 800 Q19 780 31 772 Q34 767 36 761 Q44 776 50 786 Q50 794 50 800 Z" fill="#ffa53a"/><path class="fl" d="M46 800 Q46 774 55 764 Q58 756 59 748 Q65 769 70 782 Q70 792 70 800 Z" fill="#ff7a2e"/><path class="fl" d="M57 800 Q57 782 69 775 Q72 769 73 764 Q81 778 87 787 Q87 795 87 800 Z" fill="#ffa53a"/><path class="fl" d="M89 800 Q89 772 97 760 Q99 752 100 743 Q105 766 109 780 Q109 791 109 800 Z" fill="#ffd27a"/><path class="fl" d="M92 800 Q92 769 104 757 Q107 748 108 739 Q116 763 122 779 Q122 791 122 800 Z" fill="#ffa53a"/><path class="fl" d="M118 800 Q118 771 130 759 Q133 750 134 741 Q142 765 148 779 Q148 791 148 800 Z" fill="#ffd27a"/><path class="fl" d="M143 800 Q143 776 154 767 Q157 760 158 753 Q165 772 171 784 Q171 793 171 800 Z" fill="#ffd27a"/><path class="fl" d="M156 800 Q156 766 168 753 Q171 743 172 733 Q179 760 185 776 Q185 790 185 800 Z" fill="#ff7a2e"/><path class="fl" d="M172 800 Q172 775 181 765 Q183 758 184 750 Q190 770 194 783 Q194 793 194 800 Z" fill="#ffd27a"/><path class="fl" d="M197 800 Q197 772 206 761 Q209 753 210 745 Q215 767 220 781 Q220 792 220 800 Z" fill="#ffd27a"/><path class="fl" d="M221 800 Q221 774 231 763 Q234 755 235 747 Q242 768 247 781 Q247 792 247 800 Z" fill="#ffa53a"/><path class="fl" d="M235 800 Q235 767 246 754 Q249 744 250 734 Q257 760 263 777 Q263 790 263 800 Z" fill="#ff7a2e"/><path class="fl" d="M259 800 Q259 765 270 751 Q272 741 274 730 Q281 758 286 776 Q286 790 286 800 Z" fill="#ff7a2e"/><path class="fl" d="M276 800 Q276 778 286 770 Q289 763 290 757 Q297 774 302 785 Q302 794 302 800 Z" fill="#ffd27a"/><path class="fl" d="M295 800 Q295 771 304 759 Q306 750 307 741 Q312 765 317 780 Q317 791 317 800 Z" fill="#ffd27a"/><path class="fl" d="M308 800 Q308 783 318 776 Q320 770 321 765 Q328 779 333 788 Q333 795 333 800 Z" fill="#ffd27a"/><path class="fl" d="M336 800 Q336 783 348 777 Q351 771 352 766 Q359 780 365 788 Q365 795 365 800 Z" fill="#ffa53a"/><path class="fl" d="M356 800 Q356 785 366 778 Q368 774 369 769 Q376 782 380 789 Q380 795 380 800 Z" fill="#ffa53a"/><path class="fl" d="M374 800 Q374 784 384 778 Q387 773 388 768 Q395 781 400 789 Q400 795 400 800 Z" fill="#ff7a2e"/><path class="fl" d="M385 800 Q385 773 395 763 Q398 755 399 747 Q406 768 411 781 Q411 792 411 800 Z" fill="#ffa53a"/></g>
+    <g><circle class="ember" cx="20" cy="790" r="1.2" fill="#ffb347"/><circle class="ember" cx="60" cy="770" r="1.7999999999999998" fill="#ffb347"/><circle class="ember" cx="95" cy="750" r="2.4" fill="#ffb347"/><circle class="ember" cx="140" cy="790" r="1.2" fill="#ffb347"/><circle class="ember" cx="180" cy="770" r="1.7999999999999998" fill="#ffb347"/><circle class="ember" cx="215" cy="750" r="2.4" fill="#ffb347"/><circle class="ember" cx="250" cy="790" r="1.2" fill="#ffb347"/><circle class="ember" cx="290" cy="770" r="1.7999999999999998" fill="#ffb347"/><circle class="ember" cx="330" cy="750" r="2.4" fill="#ffb347"/><circle class="ember" cx="370" cy="790" r="1.2" fill="#ffb347"/><circle class="ember" cx="45" cy="770" r="1.7999999999999998" fill="#ffb347"/><circle class="ember" cx="310" cy="750" r="2.4" fill="#ffb347"/></g>
+  </svg>
+  <div class="door-shade"></div>
+  <p class="inscription">Per me si va tra la chiassosa gente,<br>per me si va ne l'etterno schiamazzo…<br><em>Lasciate ogne quiete, voi ch'intrate</em></p>
+  <div class="portal">
+    <svg class="stone" viewBox="0 0 300 430" aria-hidden="true">
+      <defs>
+        <linearGradient id="colg" x1="0" x2="1"><stop offset="0" stop-color="#46382f"/><stop offset=".45" stop-color="#6a574b"/><stop offset="1" stop-color="#40322a"/></linearGradient>
+        <linearGradient id="soot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".3"/><stop offset=".35" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#ff5a1e" stop-opacity=".12"/></linearGradient>
+      </defs>
+      <path d="M40 396 V96 L70 80 L96 90 L130 70 L170 78 L200 66 L232 84 L260 96 V396 Z" fill="#1a1210"/>
+      <path d="M58.0 190.3 L28.3 190.4 L33.1 156.1 L61.6 164.4 Z" fill="#6a574b" stroke="#140c0a" stroke-width="1.5"/><path d="M61.2 166.0 L32.5 158.2 L46.2 126.4 L71.6 141.9 Z" fill="#62514a" stroke="#140c0a" stroke-width="1.5"/><path d="M89.7 120.5 L71.3 99.3 L100.0 80.8 L111.7 106.3 Z" fill="#62514a" stroke="#140c0a" stroke-width="1.5"/><path d="M112.8 105.9 L101.6 80.7 L134.4 71.5 L138.0 98.8 Z" fill="#5a4a40" stroke="#140c0a" stroke-width="1.5"/><path d="M161.0 98.7 L164.6 68.6 L198.2 77.7 L186.2 105.4 Z" fill="#5a4a40" stroke="#140c0a" stroke-width="1.5"/><path d="M188.7 106.6 L201.6 78.8 L230.8 97.9 L210.7 120.8 Z" fill="#6a574b" stroke="#140c0a" stroke-width="1.5"/><path d="M227.0 139.7 L252.9 122.8 L267.7 154.6 L238.1 163.5 Z" fill="#62514a" stroke="#140c0a" stroke-width="1.5"/><path d="M237.7 162.3 L267.1 153.1 L272.7 187.6 L242.0 188.2 Z" fill="#5a4a40" stroke="#140c0a" stroke-width="1.5"/><path d="M137 97 L131 60 L152 57 L156 74 L168 62 L163 97 Z" fill="#6a574b" stroke="#140c0a" stroke-width="1.5"/><path d="M142 72 q7 -8 14 0 q-2 8 -7 9 q-5 -1 -7 -9z" fill="#1a110d"/><circle cx="146" cy="73" r="1.3" fill="#ff3a12" opacity=".8"/><circle cx="152" cy="73" r="1.3" fill="#ff3a12" opacity=".8"/>
+      <path d="M6 396 V140 L14 128 L22 136 L30 122 L40 132 L52 126 V396 Z" fill="url(#colg)" stroke="#140c0a" stroke-width="1.5"/><path d="M14 140 V392" stroke="#1a110d" stroke-width="2" opacity=".55"/><path d="M22 140 V392" stroke="#1a110d" stroke-width="2" opacity=".55"/><path d="M30 140 V392" stroke="#1a110d" stroke-width="2" opacity=".55"/><path d="M38 140 V392" stroke="#1a110d" stroke-width="2" opacity=".55"/><path d="M0 394 H58 V404 H0 Z" fill="#5a4a40" stroke="#140c0a" stroke-width="1.5"/><path d="M248 396 V218 L256 206 L262 214 L272 200 L282 212 L294 204 V396 Z" fill="url(#colg)" stroke="#140c0a" stroke-width="1.5"/><path d="M256 220 V392" stroke="#1a110d" stroke-width="2" opacity=".55"/><path d="M264 220 V392" stroke="#1a110d" stroke-width="2" opacity=".55"/><path d="M272 220 V392" stroke="#1a110d" stroke-width="2" opacity=".55"/><path d="M280 220 V392" stroke="#1a110d" stroke-width="2" opacity=".55"/><path d="M242 394 H300 V404 H242 Z" fill="#5a4a40" stroke="#140c0a" stroke-width="1.5"/>
+      <path d="M24 160 l6 22 -5 14 8 20 -4 18 M30 300 l-6 18 7 12 M262 250 l6 16 -4 12 6 22 M210 104 l-8 14 4 10 M92 112 l10 12 -2 12 M150 70 l-3 14 5 8" stroke="#0e0806" stroke-width="1.4" fill="none"/><path d="M52 300 q10 10 6 26 q-4 12 4 24 M248 330 q-12 6 -8 22 q4 14 -6 22" stroke="#1e140f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M20 410 H280 V420 H20 Z" fill="#46382f" stroke="#140c0a" stroke-width="1.5"/>
+      <path d="M4 419 H296 V430 H4 Z" fill="#3a2d26" stroke="#140c0a" stroke-width="1.5"/>
+      <path d="M220 428 l6 -4 l7 3 l-2 8 Z" fill="#6a574b" stroke="#140c0a"/><path d="M236 426 l9 -8 l12 3 l-3 7 Z" fill="#6a574b" stroke="#140c0a"/><path d="M262 430 l6 -9 l6 5 l-4 8 Z" fill="#46382f" stroke="#140c0a"/><path d="M282 427 l12 -4 l11 4 l-4 6 Z" fill="#46382f" stroke="#140c0a"/><path d="M18 429 l8 -4 l6 6 l-2 8 Z" fill="#5a4a40" stroke="#140c0a"/><path d="M40 430 l12 -6 l9 2 l-2 5 Z" fill="#5a4a40" stroke="#140c0a"/><path d="M120 430 l7 -4 l9 5 l-5 8 Z" fill="#5a4a40" stroke="#140c0a"/><path d="M196 429 l10 -9 l7 7 l-4 7 Z" fill="#5a4a40" stroke="#140c0a"/>
+      
+    </svg>
+    <div class="gate">
+      <div class="beam"></div>
+      <button class="door" id="door" aria-label="Apri la Porta dell'Inferno">
+        <span class="leaf l"><span class="knocker"></span></span>
+        <span class="leaf r"><span class="knocker"></span></span>
+      </button>
+    </div>
+  </div>
+  <p class="door-hint">«Tu che se' costì, anima viva,<br>tocca la porta, e intra, se hai ardire.»</p>
+</div>
+
+<main class="wrap">
+
+  <header class="poster">
+    <p class="presents">Il decimo girone</p>
+    <h1 class="title">Il Girone dei Chiassosi</h1>
+    <p class="summons">Siete invitati a discendere<br>nell'abisso dantesco</p>
+    <p class="incipit">Nove gironi contò il Poeta, e nove ne scrisse. Ma uno gli sfuggì, perché ancora non era nato. Sabato 31, a Chiasso, lo faremo nascere noi: il girone dei dannati più festosi e rumorosi dell'Inferno.</p>
+    <p class="countdown" id="countdown"></p>
+  </header>
+
+  <section class="ticket" aria-label="Dettagli della festa">
+    <div class="head"><span>Lasciapassare per l'Inferno</span><strong>Girone X · Anima n. 666</strong></div>
+    <div class="row"><span class="k">Quando</span><span class="v">Sabato 31 ottobre 2026<br>dalle ore 19:00</span></div>
+    <div class="row"><span class="k">Dove</span><span class="v">Via Antonio Chiesa 8<br>6830 Chiasso<br><a href="https://www.google.com/maps/search/?api=1&amp;query=Via+Antonio+Chiesa+8%2C+6830+Chiasso" target="_blank" rel="noopener">Apri in Maps ↗</a></span></div>
+    <div class="row"><span class="k">Tema</span><span class="v">L'Inferno di Dante</span></div>
+    <div class="foot"><span>Caronte non dà resto</span><span>Ingresso solo in costume</span></div>
+  </section>
+
+  <section class="scene dress">
+    <div class="scene-head"><span class="label">Dress code</span><h2>Vesti il tuo peccato</h2></div>
+    <p class="decree">«Nessun'anima passa questa soglia monda:<br>chi vuole entrar nel girone eletto<br>sfoggi il peccato suo più nero.»</p>
+    <p>Scegli il peccato che più ti appartiene e indossalo in chiave Halloween: più fa paura, più ti spetta un posto d'onore tra i dannati. Alla soglia Minosse ti squadrerà e, con un colpo di coda, deciderà se sei degno di entrare.</p>
+  </section>
+
+  <section class="scene" id="rsvp">
+    <div class="scene-head"><span class="label">Canto I · La scelta</span><h2>Varcherai la porta?</h2></div>
+    <div id="rsvp-form" class="scene">
+      <div class="field" id="who">
+        <label for="name">Dimmi, anima, chi se' tu?</label>
+        <input id="name" type="text" autocomplete="given-name" autocapitalize="words" maxlength="40" placeholder="Il nome che avevi da vivo">
+      </div>
+      <p class="label" id="arena-hint">Sali con Caronte per varcare l'Acheronte · Afferra Cerbero se osi fuggire</p>
+      <div class="arena" id="arena">
+        <svg class="arena-bg" viewBox="0 0 360 320" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="asky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0302"/><stop offset=".6" stop-color="#3a0c06"/><stop offset="1" stop-color="#8a2208"/></linearGradient>
+            <linearGradient id="ariver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a1606"/><stop offset="1" stop-color="#1a0503"/></linearGradient>
+          </defs>
+          <rect width="360" height="320" fill="url(#asky)"/>
+          <path d="M0 210 L20 180 L36 196 L58 150 L76 176 L96 140 L118 186 L130 210 Z M360 210 L338 172 L318 190 L298 146 L280 178 L258 136 L240 184 L228 210 Z" fill="#160604"/>
+          <g fill="#0e0403"><path d="M140 210 V176 h10 v-12 h8 v12 h12 v-22 h10 v22 h14 v-8 h10 v8 h12 V210 Z"/></g>
+          <g fill="#ff5a1e" opacity=".8"><rect x="152" y="180" width="2" height="4"/><rect x="172" y="168" width="2" height="4"/><rect x="198" y="186" width="2" height="4"/></g>
+          <rect y="208" width="360" height="112" fill="url(#ariver)"/>
+          <g class="awaves" stroke="#ff7a2e" stroke-width="1.4" fill="none" opacity=".4">
+            <path d="M-40 226q10-5 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0"/>
+            <path d="M-40 252q10-5 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0" opacity=".6"/>
+          </g>
+          <g fill="#efe0c4" opacity=".25"><circle cx="18" cy="214" r="3"/><circle cx="28" cy="216" r="3"/><circle cx="38" cy="213" r="3"/><circle cx="330" cy="215" r="3"/><circle cx="342" cy="213" r="3"/></g>
+          <g><path class="fl" d="M-19 320 Q-19 290 -3 278 Q1 269 4 260 Q14 284 22 299 Q22 311 22 320 Z" fill="#7a1a08"/><path class="fl" d="M12 320 Q12 289 25 277 Q28 268 30 259 Q38 283 44 299 Q44 311 44 320 Z" fill="#7a1a08"/><path class="fl" d="M35 320 Q35 303 49 296 Q53 291 55 285 Q63 299 70 308 Q70 315 70 320 Z" fill="#7a1a08"/><path class="fl" d="M55 320 Q55 303 67 296 Q71 291 72 286 Q80 300 86 308 Q86 315 86 320 Z" fill="#7a1a08"/><path class="fl" d="M74 320 Q74 301 91 294 Q95 288 97 283 Q107 298 116 307 Q116 314 116 320 Z" fill="#a3280c"/><path class="fl" d="M101 320 Q101 289 113 277 Q116 267 117 258 Q125 283 131 298 Q131 311 131 320 Z" fill="#a3280c"/><path class="fl" d="M119 320 Q119 305 135 299 Q140 294 142 290 Q152 302 161 309 Q161 315 161 320 Z" fill="#7a1a08"/><path class="fl" d="M156 320 Q156 286 168 272 Q171 262 173 252 Q180 279 186 296 Q186 310 186 320 Z" fill="#7a1a08"/><path class="fl" d="M171 320 Q171 286 186 272 Q189 262 191 252 Q200 279 208 296 Q208 310 208 320 Z" fill="#7a1a08"/><path class="fl" d="M197 320 Q197 286 209 272 Q212 262 214 251 Q221 279 227 296 Q227 310 227 320 Z" fill="#a3280c"/><path class="fl" d="M223 320 Q223 298 235 289 Q238 282 239 276 Q247 293 253 304 Q253 313 253 320 Z" fill="#7a1a08"/><path class="fl" d="M241 320 Q241 298 257 290 Q261 283 263 277 Q273 294 282 305 Q282 314 282 320 Z" fill="#7a1a08"/><path class="fl" d="M275 320 Q275 291 286 279 Q289 270 291 262 Q298 285 303 300 Q303 311 303 320 Z" fill="#a3280c"/><path class="fl" d="M300 320 Q300 295 313 286 Q316 278 317 271 Q326 290 332 303 Q332 313 332 320 Z" fill="#a3280c"/><path class="fl" d="M320 320 Q320 301 333 294 Q336 289 337 283 Q345 298 351 307 Q351 314 351 320 Z" fill="#7a1a08"/><path class="fl" d="M348 320 Q348 298 362 289 Q365 282 367 276 Q376 293 382 304 Q382 313 382 320 Z" fill="#a3280c"/></g>
+          <g><path class="fl" d="M-11 320 Q-11 304 -4 298 Q-2 294 -1 289 Q4 301 8 309 Q8 315 8 320 Z" fill="#e0561e"/><path class="fl" d="M6 320 Q6 304 18 297 Q21 293 23 288 Q31 301 37 309 Q37 315 37 320 Z" fill="#e0561e"/><path class="fl" d="M26 320 Q26 300 38 292 Q41 286 42 280 Q50 296 56 306 Q56 314 56 320 Z" fill="#ff7a2e"/><path class="fl" d="M46 320 Q46 300 55 293 Q57 287 58 281 Q64 296 68 306 Q68 314 68 320 Z" fill="#ff7a2e"/><path class="fl" d="M57 320 Q57 302 68 295 Q71 290 73 285 Q80 299 85 308 Q85 315 85 320 Z" fill="#ff7a2e"/><path class="fl" d="M79 320 Q79 300 87 292 Q89 285 90 279 Q95 296 99 306 Q99 314 99 320 Z" fill="#ff7a2e"/><path class="fl" d="M103 320 Q103 307 112 302 Q114 298 115 295 Q120 305 124 311 Q124 316 124 320 Z" fill="#ff7a2e"/><path class="fl" d="M126 320 Q126 305 135 299 Q138 294 139 290 Q145 302 149 309 Q149 315 149 320 Z" fill="#ff7a2e"/><path class="fl" d="M136 320 Q136 302 147 294 Q149 289 151 283 Q157 298 163 307 Q163 314 163 320 Z" fill="#ffa53a"/><path class="fl" d="M162 320 Q162 299 171 291 Q173 284 174 278 Q179 295 183 305 Q183 314 183 320 Z" fill="#e0561e"/><path class="fl" d="M169 320 Q169 304 181 298 Q184 293 186 288 Q194 301 200 309 Q200 315 200 320 Z" fill="#e0561e"/><path class="fl" d="M191 320 Q191 304 202 298 Q205 293 207 289 Q214 301 220 309 Q220 315 220 320 Z" fill="#ff7a2e"/><path class="fl" d="M214 320 Q214 310 226 306 Q229 303 231 300 Q238 308 245 313 Q245 317 245 320 Z" fill="#ffa53a"/><path class="fl" d="M226 320 Q226 306 238 300 Q241 295 242 291 Q249 303 255 310 Q255 316 255 320 Z" fill="#e0561e"/><path class="fl" d="M261 320 Q261 305 269 299 Q271 294 272 289 Q277 302 281 309 Q281 315 281 320 Z" fill="#ff7a2e"/><path class="fl" d="M269 320 Q269 306 277 301 Q279 297 281 293 Q286 304 290 310 Q290 316 290 320 Z" fill="#ff7a2e"/><path class="fl" d="M285 320 Q285 306 298 301 Q301 296 302 292 Q310 303 316 310 Q316 316 316 320 Z" fill="#e0561e"/><path class="fl" d="M315 320 Q315 306 325 301 Q328 296 329 292 Q335 303 340 310 Q340 316 340 320 Z" fill="#ffa53a"/><path class="fl" d="M326 320 Q326 308 336 304 Q339 300 340 297 Q346 306 351 312 Q351 317 351 320 Z" fill="#e0561e"/><path class="fl" d="M343 320 Q343 301 353 294 Q355 288 357 283 Q363 298 368 307 Q368 314 368 320 Z" fill="#e0561e"/></g>
+          <g><circle class="ember" cx="20" cy="315" r="1.0" fill="#ffb347"/><circle class="ember" cx="70" cy="305" r="1.5" fill="#ffb347"/><circle class="ember" cx="110" cy="295" r="2.0" fill="#ffb347"/><circle class="ember" cx="160" cy="315" r="1.0" fill="#ffb347"/><circle class="ember" cx="205" cy="305" r="1.5" fill="#ffb347"/><circle class="ember" cx="250" cy="295" r="2.0" fill="#ffb347"/><circle class="ember" cx="290" cy="315" r="1.0" fill="#ffb347"/><circle class="ember" cx="335" cy="305" r="1.5" fill="#ffb347"/></g>
+        </svg>
+        <button class="ghost" id="ghost" aria-label="Sì, salgo sulla barca di Caronte">
+          <svg viewBox="0 -16 110 100">
+            <path d="M96 -2 L106 80" stroke="#5a3a22" stroke-width="3" stroke-linecap="round"/>
+            <path d="M48 18 Q40 28 38 64 H74 Q72 28 64 18 Z" fill="#1c1410"/>
+            <path d="M44 6 Q40 -10 56 -12 Q72 -10 70 6 Q68 18 62 20 L50 20 Q44 16 44 6 Z" fill="#120c0a"/>
+            <path d="M48 -2 Q38 -6 33 0 Q38 0 40 3 Q34 6 33 11 Q40 6 46 8 Z" fill="#e8e0d2"/>
+            <ellipse cx="56" cy="4" rx="7" ry="9" fill="#cfc4b2"/>
+            <circle cx="53" cy="3" r="2.4" fill="#ffd27a" stroke="#ff5a1e" stroke-width="1.4"/>
+            <circle cx="59.5" cy="3" r="2.4" fill="#ffd27a" stroke="#ff5a1e" stroke-width="1.4"/>
+            <path d="M49 8 Q52 34 56 40 Q60 34 63 8 Q60 13 56 13 Q52 13 49 8 Z" fill="#e8e0d2"/>
+            <path d="M68 26 Q80 22 92 12" stroke="#1c1410" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <path d="M2 58 L8 66 H96 L104 56 Q106 62 102 68 L90 82 H18 L6 70 Q2 64 2 58 Z" fill="#4a2414"/>
+            <path d="M6 66 H100" stroke="#7a4228" stroke-width="3"/>
+            <text x="54" y="79" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="13" fill="#ffd27a">SÌ</text>
+          </svg>
+        </button>
+        <button class="spider" id="spider" aria-label="No, non ci sarò">
+          <svg viewBox="0 0 120 84">
+            <path d="M24 84 Q28 56 44 50 L76 50 Q92 56 96 84 Z" fill="#241009"/>
+            <text x="60" y="76" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="14" fill="#ffd27a">NO</text>
+            <g class="heads">
+              <g transform="translate(26 40) rotate(-14)"><path d="M-12 -10 L-10 -26 L-3 -14 Z M12 -10 L10 -26 L3 -14 Z" fill="#1f0d0a"/><ellipse cx="0" cy="-4" rx="14" ry="13" fill="#2e1712"/><circle cx="-5" cy="-7" r="2.6" fill="#ff3a12"/><circle cx="5" cy="-7" r="2.6" fill="#ff3a12"/><path d="M-9 4 Q0 16 9 4 Q0 8 -9 4 Z" fill="#7a0d08"/><path d="M-6 5 l1.5 4 1.5-3.5 M6 5 l-1.5 4 -1.5-3.5" fill="#f3ead6"/></g>
+              <g transform="translate(94 40) rotate(14)"><path d="M-12 -10 L-10 -26 L-3 -14 Z M12 -10 L10 -26 L3 -14 Z" fill="#1f0d0a"/><ellipse cx="0" cy="-4" rx="14" ry="13" fill="#2e1712"/><circle cx="-5" cy="-7" r="2.6" fill="#ff3a12"/><circle cx="5" cy="-7" r="2.6" fill="#ff3a12"/><path d="M-9 4 Q0 16 9 4 Q0 8 -9 4 Z" fill="#7a0d08"/><path d="M-6 5 l1.5 4 1.5-3.5 M6 5 l-1.5 4 -1.5-3.5" fill="#f3ead6"/></g>
+              <g transform="translate(60 34)"><path d="M-15 -12 L-12 -32 L-4 -17 Z M15 -12 L12 -32 L4 -17 Z" fill="#1f0d0a"/><ellipse cx="0" cy="-4" rx="17" ry="16" fill="#2e1712"/><circle cx="-6" cy="-8" r="3.2" fill="#ff3a12"/><circle cx="6" cy="-8" r="3.2" fill="#ff3a12"/><ellipse cx="0" cy="0" rx="4" ry="2.6" fill="#0a0303"/><path d="M-11 6 Q0 22 11 6 Q0 11 -11 6 Z" fill="#7a0d08"/><path d="M-7 7 l2 5 2-4 M7 7 l-2 5 -2-4" fill="#f3ead6"/></g>
+            </g>
+          </svg>
+        </button>
+        <p class="taunt" id="taunt" aria-live="polite"></p>
+      </div>
+    </div>
+    <div id="rsvp-status" class="status" hidden>
+      <p id="status-text"></p>
+      <p class="err" id="status-err" hidden></p>
+      <button class="btn" id="change">Cambia risposta</button>
+    </div>
+  </section>
+
+  <section class="scene" id="list">
+    <div class="scene-head"><span class="label">Canto II · Chi viene</span><h2>La lista dei dannati</h2></div>
+    <p>La lista è custodita dai diavoletti di Malebolge. Acchiappane 7 in 10 secondi per vedere chi ha già varcato la porta.</p>
+    <div class="batfield" id="batfield">
+      <div class="moon"></div>
+      <div class="hud" id="hud" hidden><span id="hud-hits">0/7</span><span id="hud-time">10.0 s</span></div>
+      <div class="overlay-msg" id="bat-msg">
+        <p id="bat-msg-text">Pronto? I diavoletti sono veloci e cambiano direzione.</p>
+        <button class="btn solid" id="bat-start">Inizia la caccia</button>
+      </div>
+    </div>
+    <div class="guests" id="guests" hidden>
+      <p class="count" id="guest-count"></p>
+      <ol id="guest-list"></ol>
+      <button class="btn" id="bat-again" type="button">Caccia di nuovo i diavoletti</button>
+      <p class="note" id="guest-note"></p>
+    </div>
+  </section>
+
+  <footer>Nessun dannato è stato maltrattato durante la festa · Forse</footer>
+</main>
+
+<!-- Jump scare -->
+<div class="moment" id="scare" hidden aria-live="assertive">
+  <svg class="face" viewBox="0 0 320 280" aria-hidden="true">
+    <ellipse cx="160" cy="250" rx="140" ry="40" fill="#1a0806"/>
+    <path d="M60 280 Q70 170 110 150 L210 150 Q250 170 260 280 Z" fill="#241009"/>
+    <g transform="translate(66 140) rotate(-18) scale(0.95)">
+      <path d="M-42 -38 L-34 -88 L-12 -50 Z M42 -38 L34 -88 L12 -50 Z" fill="#1f0d0a"/>
+      <path d="M-36 -44 L-32 -74 L-20 -50 Z M36 -44 L32 -74 L20 -50 Z" fill="#5a1a10"/>
+      <ellipse cx="0" cy="-20" rx="46" ry="42" fill="#2e1712"/>
+      <path d="M-34 -44 L-6 -31 M34 -44 L6 -31" stroke="#120604" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <ellipse cx="-18" cy="-26" rx="9" ry="6" fill="#ff3a12"/><ellipse cx="18" cy="-26" rx="9" ry="6" fill="#ff3a12"/>
+      <ellipse cx="-18" cy="-26" rx="2" ry="5" fill="#120604"/><ellipse cx="18" cy="-26" rx="2" ry="5" fill="#120604"/>
+      <path d="M-28 -8 Q0 -18 28 -8 L24 16 Q0 22 -24 16 Z" fill="#3e1d16"/>
+      <ellipse cx="0" cy="-6" rx="11" ry="7" fill="#0a0303"/>
+      <path class="jaw" d="M-36 10 Q0 96 36 10 Q0 24 -36 10 Z" fill="#5a0805" stroke="#120604" stroke-width="2"/>
+      <ellipse cx="0" cy="54" rx="13" ry="10" fill="#b8283c"/>
+      <path d="M-28 13 L-22 38 L-16 16 Z M28 13 L22 38 L16 16 Z M-10 18 L-6 30 L-2 19 Z M10 18 L6 30 L2 19 Z" fill="#f3ead6"/>
+      <path d="M-22 60 L-17 40 L-12 58 Z M22 60 L17 40 L12 58 Z M-6 66 L-3 52 L0 66 Z M6 66 L3 52 L0 66 Z" fill="#f3ead6"/>
+      <path d="M-14 66 q2 16 -1 26 M14 64 q3 12 0 22" stroke="#dfe7ec" stroke-width="2.5" opacity=".6" fill="none"/>
+      <path d="M-38 66 Q0 84 38 66 L40 76 Q0 96 -40 76 Z" fill="#3a2a22"/>
+      <path d="M-28 74 l-3 -9 7 4z M-10 80 l0 -10 5 8z M10 80 l0 -10 -5 8z M28 74 l3 -9 -7 4z" fill="#c9b9a0"/>
+    </g>
+    <g transform="translate(254 140) rotate(18) scale(0.95)">
+      <path d="M-42 -38 L-34 -88 L-12 -50 Z M42 -38 L34 -88 L12 -50 Z" fill="#1f0d0a"/>
+      <path d="M-36 -44 L-32 -74 L-20 -50 Z M36 -44 L32 -74 L20 -50 Z" fill="#5a1a10"/>
+      <ellipse cx="0" cy="-20" rx="46" ry="42" fill="#2e1712"/>
+      <path d="M-34 -44 L-6 -31 M34 -44 L6 -31" stroke="#120604" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <ellipse cx="-18" cy="-26" rx="9" ry="6" fill="#ff3a12"/><ellipse cx="18" cy="-26" rx="9" ry="6" fill="#ff3a12"/>
+      <ellipse cx="-18" cy="-26" rx="2" ry="5" fill="#120604"/><ellipse cx="18" cy="-26" rx="2" ry="5" fill="#120604"/>
+      <path d="M-28 -8 Q0 -18 28 -8 L24 16 Q0 22 -24 16 Z" fill="#3e1d16"/>
+      <ellipse cx="0" cy="-6" rx="11" ry="7" fill="#0a0303"/>
+      <path class="jaw" d="M-36 10 Q0 96 36 10 Q0 24 -36 10 Z" fill="#5a0805" stroke="#120604" stroke-width="2"/>
+      <ellipse cx="0" cy="54" rx="13" ry="10" fill="#b8283c"/>
+      <path d="M-28 13 L-22 38 L-16 16 Z M28 13 L22 38 L16 16 Z M-10 18 L-6 30 L-2 19 Z M10 18 L6 30 L2 19 Z" fill="#f3ead6"/>
+      <path d="M-22 60 L-17 40 L-12 58 Z M22 60 L17 40 L12 58 Z M-6 66 L-3 52 L0 66 Z M6 66 L3 52 L0 66 Z" fill="#f3ead6"/>
+      <path d="M-14 66 q2 16 -1 26 M14 64 q3 12 0 22" stroke="#dfe7ec" stroke-width="2.5" opacity=".6" fill="none"/>
+      <path d="M-38 66 Q0 84 38 66 L40 76 Q0 96 -40 76 Z" fill="#3a2a22"/>
+      <path d="M-28 74 l-3 -9 7 4z M-10 80 l0 -10 5 8z M10 80 l0 -10 -5 8z M28 74 l3 -9 -7 4z" fill="#c9b9a0"/>
+    </g>
+    <g transform="translate(160 120) rotate(0) scale(1.25)">
+      <path d="M-42 -38 L-34 -88 L-12 -50 Z M42 -38 L34 -88 L12 -50 Z" fill="#1f0d0a"/>
+      <path d="M-36 -44 L-32 -74 L-20 -50 Z M36 -44 L32 -74 L20 -50 Z" fill="#5a1a10"/>
+      <ellipse cx="0" cy="-20" rx="46" ry="42" fill="#2e1712"/>
+      <path d="M-34 -44 L-6 -31 M34 -44 L6 -31" stroke="#120604" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <ellipse cx="-18" cy="-26" rx="9" ry="6" fill="#ff3a12"/><ellipse cx="18" cy="-26" rx="9" ry="6" fill="#ff3a12"/>
+      <ellipse cx="-18" cy="-26" rx="2" ry="5" fill="#120604"/><ellipse cx="18" cy="-26" rx="2" ry="5" fill="#120604"/>
+      <path d="M-28 -8 Q0 -18 28 -8 L24 16 Q0 22 -24 16 Z" fill="#3e1d16"/>
+      <ellipse cx="0" cy="-6" rx="11" ry="7" fill="#0a0303"/>
+      <path class="jaw" d="M-36 10 Q0 96 36 10 Q0 24 -36 10 Z" fill="#5a0805" stroke="#120604" stroke-width="2"/>
+      <ellipse cx="0" cy="54" rx="13" ry="10" fill="#b8283c"/>
+      <path d="M-28 13 L-22 38 L-16 16 Z M28 13 L22 38 L16 16 Z M-10 18 L-6 30 L-2 19 Z M10 18 L6 30 L2 19 Z" fill="#f3ead6"/>
+      <path d="M-22 60 L-17 40 L-12 58 Z M22 60 L17 40 L12 58 Z M-6 66 L-3 52 L0 66 Z M6 66 L3 52 L0 66 Z" fill="#f3ead6"/>
+      <path d="M-14 66 q2 16 -1 26 M14 64 q3 12 0 22" stroke="#dfe7ec" stroke-width="2.5" opacity=".6" fill="none"/>
+      <path d="M-38 66 Q0 84 38 66 L40 76 Q0 96 -40 76 Z" fill="#3a2a22"/>
+      <path d="M-28 74 l-3 -9 7 4z M-10 80 l0 -10 5 8z M10 80 l0 -10 -5 8z M28 74 l3 -9 -7 4z" fill="#c9b9a0"/>
+    </g>
+  </svg>
+  <div class="after">
+    <p class="big">Cerbero ti ha fiutato.</p>
+    <p id="scare-text">Finirai tra gli ignavi. Se cambi idea, la porta resta socchiusa.</p>
+    <button class="btn solid" id="scare-close">Torna a riveder le stelle</button>
+  </div>
+</div>
+
+<!-- Charon -->
+<div class="moment" id="party" hidden aria-live="polite">
+  <svg class="hell" viewBox="0 0 360 280" aria-hidden="true">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d0302"/><stop offset=".55" stop-color="#4a0f06"/><stop offset=".72" stop-color="#c4401d"/></linearGradient>
+      <linearGradient id="river" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a1608"/><stop offset="1" stop-color="#140504"/></linearGradient>
+    </defs>
+    <rect width="360" height="280" fill="url(#sky)"/>
+    <g class="dite" fill="#0d0302">
+      <path d="M0 196V160h18v-14h10v14h14v-26h12v26h16v-10h12v10h10v36z"/>
+      <path d="M220 196v-30h14v-22l8-10 8 10v22h12v-12h10v12h18v-34h14v34h12v-20h12v20h32v30z"/>
+      <g class="flames" fill="#ff7a2e"><path d="M24 146c-3-6 2-10 2-14 4 4 4 8 2 14zM60 134c-4-8 2-12 2-17 5 5 5 10 2 17zM242 134c-3-7 2-11 2-15 4 4 4 9 2 15zM304 132c-4-8 2-12 2-17 5 5 5 10 2 17z"/></g>
+      <g fill="#ff3a12"><rect x="58" y="146" width="3" height="5"/><rect x="236" y="176" width="3" height="5"/><rect x="306" y="150" width="3" height="5"/><rect x="104" y="172" width="3" height="4"/></g>
+    </g>
+    <rect y="194" width="360" height="86" fill="url(#river)"/>
+    <g class="waves2" stroke="#ff7a2e" stroke-width="1.6" fill="none" opacity=".45">
+      <path d="M-40 214q10-5 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0"/>
+      <path d="M-40 244q10-5 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0" opacity=".6"/>
+    </g>
+    <g class="souls" fill="#efe0c4" opacity=".35"><circle cx="30" cy="206" r="4"/><circle cx="44" cy="208" r="4"/><circle cx="58" cy="205" r="4"/><circle cx="316" cy="208" r="4"/><circle cx="330" cy="206" r="4"/></g>
+    <g class="ferry">
+      <g transform="translate(84 104) scale(1.3)"><g class="rocker">
+        <!-- the pole, planted in the river -->
+        <g class="pole"><path d="M108 -34 L124 104" stroke="#5a3a22" stroke-width="3.5" stroke-linecap="round"/></g>
+        <!-- Caronte: old, white-haired, eyes like wheels of fire, tattered robe -->
+        <path d="M72 18 Q62 30 61 74 L65 70 L69 76 L73 69 L77 76 L81 70 L86 76 L90 69 L95 75 L97 72 Q96 34 88 18 Z" fill="#1c1410"/>
+        <path d="M70 34 Q68 52 70 70 M80 30 Q80 52 82 72 M90 36 Q92 52 92 70" stroke="#3a2a20" stroke-width="1.5" fill="none" opacity=".8"/>
+        <path d="M68 6 Q64 -14 80 -18 Q96 -16 94 6 Q92 20 86 22 L74 22 Q68 18 68 6 Z" fill="#120c0a"/>
+        <path d="M72 -8 Q60 -12 54 -6 Q60 -6 62 -3 Q55 0 53 6 Q61 1 66 4 Q62 9 62 14 Q68 6 72 6 Z" fill="#e8e0d2"/>
+        <ellipse cx="80" cy="2" rx="8" ry="10" fill="#cfc4b2"/>
+        <path d="M73 -3 Q80 -9 88 -3" stroke="#e8e0d2" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="76.5" cy="1" r="2.8" fill="#ffd27a" stroke="#ff5a1e" stroke-width="1.6"/>
+        <circle cx="84" cy="1" r="2.8" fill="#ffd27a" stroke="#ff5a1e" stroke-width="1.6"/>
+        <path d="M72 7 Q76 40 81 48 Q84 40 89 7 Q85 12 80.5 12 Q76 12 72 7 Z" fill="#e8e0d2"/>
+        <path d="M77 18 Q79 32 81 44 M84 16 Q83 30 82 42" stroke="#b8ac98" stroke-width="1" fill="none"/>
+        <path d="M78 10 Q80.5 13 83 10" stroke="#5a1a10" stroke-width="1.6" fill="none"/>
+        <path d="M90 26 Q100 22 106 12" stroke="#1c1410" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <path d="M104 8 q4 -2 6 2 q-1 5 -6 6 z" fill="#cfc4b2"/>
+        <!-- the soul being ferried: the guest -->
+        <path d="M22 58 Q20 30 36 26 Q52 30 50 58 Z" fill="#8a7a72" opacity=".9"/>
+        <g id="passenger-head" transform="translate(36 18)">
+          <circle r="11" fill="#e8dccb"/>
+          <path d="M-12 2 Q-14 -14 0 -14 Q14 -14 12 2 Q8 -8 0 -8 Q-8 -8 -12 2 Z" fill="#5a4a42"/>
+          <ellipse cx="-4" cy="1" rx="2.2" ry="3" fill="#140605"/><ellipse cx="4" cy="1" rx="2.2" ry="3" fill="#140605"/>
+          <ellipse cx="0" cy="7" rx="2.2" ry="2.8" fill="#140605"/>
+        </g>
+        <!-- the boat -->
+        <path d="M-4 58 Q-2 52 2 50 L6 58 H110 L118 48 Q120 54 118 60 L104 80 H14 Z" fill="#4a2414"/>
+        <path d="M2 60 H114" stroke="#7a4228" stroke-width="3"/>
+        <path d="M10 68 H108 M14 74 H104" stroke="#2a1208" stroke-width="1.5"/>
+        <path d="M2 50 V30" stroke="#3a1a0e" stroke-width="2"/>
+        <path d="M-2 30 h8 v10 h-8 z" fill="#2a1a10"/><rect x="-0.5" y="31.5" width="5" height="7" fill="#ffd27a"/>
+        <circle cx="2" cy="35" r="7" fill="#ffd27a" opacity=".25"/>
+      </g></g>
+    </g>
+    <g class="embers" fill="#ffb347">
+      <circle cx="40" cy="270" r="1.6"/><circle cx="100" cy="275" r="1.2"/><circle cx="170" cy="272" r="1.8"/><circle cx="240" cy="276" r="1.3"/><circle cx="300" cy="271" r="1.7"/><circle cx="340" cy="274" r="1.2"/>
+    </g>
+  </svg>
+  <div class="after">
+    <p class="big" id="party-title">Benvenuto all'Inferno!</p>
+    <p>Caronte ti traghetta sull'Acheronte sabato 31 alle 19:00, da Via Antonio Chiesa 8. Ricorda: vesti il tuo peccato.</p>
+    <button class="btn solid" id="party-close">Sali a bordo</button>
+  </div>
+</div>
+
+<script>
+/* ===== Configurazione ===== */
+// Incolla qui il link della Web App di Google Apps Script (finisce con /exec).
+// Finché è vuoto la pagina funziona in modalità prova: le risposte restano sul telefono.
+const SCRIPT_URL = '';
+
+
+const PARTY = new Date('2026-10-31T19:00:00+01:00');
+const STORE_KEY = 'naqp-2026';
+const $ = (id) => document.getElementById(id);
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function load(){ try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch(e){ return {}; } }
+function save(patch){ try { localStorage.setItem(STORE_KEY, JSON.stringify(Object.assign(load(), patch))); } catch(e){} }
+
+/* ===== Audio (generated, no files) ===== */
+let ac = null;
+function audio(){
+  if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ ac = null; } }
+  if (ac && ac.state === 'suspended') ac.resume();
+  return ac;
+}
+function noiseBuffer(ctx, secs){
+  const b = ctx.createBuffer(1, ctx.sampleRate * secs, ctx.sampleRate);
+  const d = b.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  return b;
+}
+function creak(){
+  // the Gate of Hell: a slow creaking hinge, the doors slamming, a dark choir and crackling flames
+  const ctx = audio(); if (!ctx) return;
+  const t = ctx.currentTime;
+  const master = ctx.createGain(); master.gain.value = .9; master.connect(ctx.destination);
+  const burst = (at, len, type, freq, q, gain) => {
+    const n = ctx.createBufferSource(); n.buffer = noiseBuffer(ctx, len + .05);
+    const f = ctx.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q;
+    const g = ctx.createGain(); g.gain.setValueAtTime(gain, at); g.gain.exponentialRampToValueAtTime(.0001, at + len);
+    n.connect(f).connect(g).connect(master); n.start(at); n.stop(at + len + .05);
+  };
+
+  // 1. old hinge: stick-slip clicks that slow down as the doors swing
+  let at = t, gap = .022;
+  while (at < t + 1.4) {
+    const pitch = 380 + (at - t) * 160 + Math.random() * 60;
+    burst(at, .03, 'bandpass', pitch, 28, .9 + Math.random() * .5);
+    burst(at, .02, 'bandpass', pitch * 2.7, 30, .35);
+    at += gap; gap *= 1.07;
+  }
+
+  // 2. the doors slam against the walls
+  const tb = t + 1.45;
+  const boom = ctx.createOscillator(); boom.type = 'sine';
+  boom.frequency.setValueAtTime(62, tb); boom.frequency.exponentialRampToValueAtTime(26, tb + 1);
+  const bg = ctx.createGain(); bg.gain.setValueAtTime(1.3, tb); bg.gain.exponentialRampToValueAtTime(.001, tb + 1.4);
+  boom.connect(bg).connect(master); boom.start(tb); boom.stop(tb + 1.5);
+  burst(tb, .35, 'lowpass', 700, 1, 1);
+
+  // 3. a low dissonant drone rising from below
+  [[55, .22], [58.3, .16], [82.4, .1]].forEach(([f, gmax]) => {
+    const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = f;
+    const g = ctx.createGain(); g.gain.setValueAtTime(0, t + .3); g.gain.linearRampToValueAtTime(gmax, t + 1.8); g.gain.linearRampToValueAtTime(0, t + 4.2);
+    o.connect(g).connect(master); o.start(t + .3); o.stop(t + 4.3);
+  });
+
+  // 4. a ghostly choir singing "aah" on a diminished chord
+  [110, 130.8, 155.6, 220].forEach((f, k) => {
+    const s0 = t + 1.3 + k * .08;
+    const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = f;
+    const vib = ctx.createOscillator(); vib.frequency.value = 4.6 + k * .3; const vg = ctx.createGain(); vg.gain.value = f * .012;
+    vib.connect(vg).connect(o.frequency);
+    const f1 = ctx.createBiquadFilter(); f1.type = 'bandpass'; f1.frequency.value = 760; f1.Q.value = 6;
+    const f2 = ctx.createBiquadFilter(); f2.type = 'bandpass'; f2.frequency.value = 1150; f2.Q.value = 7;
+    const g = ctx.createGain(); g.gain.setValueAtTime(0, s0); g.gain.linearRampToValueAtTime(.16, s0 + 1); g.gain.linearRampToValueAtTime(0, s0 + 2.8);
+    o.connect(f1).connect(g); o.connect(f2).connect(g); g.connect(master);
+    o.start(s0); vib.start(s0); o.stop(s0 + 2.9); vib.stop(s0 + 2.9);
+  });
+
+  // 5. flames crackling beyond the gate
+  for (let i = 0; i < 34; i++) {
+    burst(t + 1.4 + Math.random() * 2.4, .015 + Math.random() * .03, 'highpass', 1800 + Math.random() * 2500, .7, .18 + Math.random() * .3);
+  }
+  const roar = ctx.createBufferSource(); roar.buffer = noiseBuffer(ctx, 3);
+  const rl = ctx.createBiquadFilter(); rl.type = 'lowpass'; rl.frequency.value = 420;
+  const rg = ctx.createGain(); rg.gain.setValueAtTime(0, t + 1.3); rg.gain.linearRampToValueAtTime(.35, t + 2); rg.gain.linearRampToValueAtTime(0, t + 4.2);
+  roar.connect(rl).connect(rg).connect(master); roar.start(t + 1.3);
+
+  buzz([30, 40, 30, 40, 30, 300, 60, 400]);
+}
+function scream(){
+  const ctx = audio(); if (!ctx) return;
+  const t = ctx.currentTime;
+  const master = ctx.createGain(); master.gain.value = .95; master.connect(ctx.destination);
+  const shaper = ctx.createWaveShaper();
+  const curve = new Float32Array(1024);
+  for (let i = 0; i < 1024; i++){ const x = i / 512 - 1; curve[i] = Math.tanh(x * 8); }
+  shaper.curve = curve; shaper.connect(master);
+  // three heads, three growls slightly out of tune, rising into a bark-roar
+  [70, 92, 118].forEach((f, k) => {
+    const o = ctx.createOscillator(); o.type = 'sawtooth';
+    o.frequency.setValueAtTime(f, t);
+    o.frequency.linearRampToValueAtTime(f * 1.25, t + .12);
+    o.frequency.exponentialRampToValueAtTime(f * 3.2, t + .35);
+    o.frequency.exponentialRampToValueAtTime(f * 1.4, t + 1.3);
+    const trem = ctx.createOscillator(); trem.frequency.value = 26 + k * 5;
+    const tg = ctx.createGain(); tg.gain.value = .5;
+    const g = ctx.createGain(); g.gain.value = .5;
+    trem.connect(tg).connect(g.gain);
+    const env = ctx.createGain();
+    env.gain.setValueAtTime(0, t); env.gain.linearRampToValueAtTime(.35, t + .05); env.gain.setValueAtTime(.35, t + 1); env.gain.exponentialRampToValueAtTime(.001, t + 1.6);
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1400;
+    o.connect(g).connect(lp).connect(env).connect(shaper);
+    o.start(t + k * .04); trem.start(t); o.stop(t + 1.7); trem.stop(t + 1.7);
+  });
+  const n = ctx.createBufferSource(); n.buffer = noiseBuffer(ctx, 1.4);
+  const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 600; bp.Q.value = .8;
+  const ng = ctx.createGain(); ng.gain.setValueAtTime(.7, t); ng.gain.exponentialRampToValueAtTime(.001, t + 1.2);
+  n.connect(bp).connect(ng).connect(master); n.start(t);
+  const thud = ctx.createOscillator(); thud.type = 'sine';
+  thud.frequency.setValueAtTime(110, t); thud.frequency.exponentialRampToValueAtTime(30, t + .5);
+  const th = ctx.createGain(); th.gain.setValueAtTime(1, t); th.gain.exponentialRampToValueAtTime(.001, t + .6);
+  thud.connect(th).connect(master); thud.start(t); thud.stop(t + .7);
+}
+function organ(){
+  const ctx = audio(); if (!ctx) return;
+  const t = ctx.currentTime;
+  const notes = [220, 261.6, 329.6, 311.1, 329.6, 392, 440];
+  notes.forEach((f, i) => {
+    [1, 2].forEach((h) => {
+      const o = ctx.createOscillator(); o.type = h === 1 ? 'triangle' : 'square';
+      o.frequency.value = f * h;
+      const g = ctx.createGain(); const s = t + i * .16;
+      g.gain.setValueAtTime(0, s); g.gain.linearRampToValueAtTime(h === 1 ? .18 : .04, s + .02); g.gain.exponentialRampToValueAtTime(.001, s + .3);
+      o.connect(g).connect(ctx.destination); o.start(s); o.stop(s + .32);
+    });
+  });
+}
+function blip(freq){
+  const ctx = audio(); if (!ctx) return;
+  const t = ctx.currentTime;
+  const o = ctx.createOscillator(); o.type = 'square'; o.frequency.setValueAtTime(freq, t); o.frequency.exponentialRampToValueAtTime(freq / 3, t + .12);
+  const g = ctx.createGain(); g.gain.setValueAtTime(.12, t); g.gain.exponentialRampToValueAtTime(.001, t + .14);
+  o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + .15);
+}
+function buzz(pattern){ try { navigator.vibrate && navigator.vibrate(pattern); } catch(e){} }
+
+/* ===== Door ===== */
+$('door').addEventListener('click', () => {
+  creak();
+  $('door').classList.add('open');
+  $('door-screen').classList.add('gone');
+  setTimeout(() => { $('door-screen').hidden = true; document.body.classList.remove('locked'); }, reduceMotion ? 50 : 1900);
+});
+
+/* ===== Countdown ===== */
+function tick(){
+  const ms = PARTY - Date.now();
+  const el = $('countdown');
+  if (ms <= 0) { el.textContent = 'La porta è aperta. Stasera.'; return; }
+  const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
+  el.textContent = `Mancano ${d} giorni, ${h} ore e ${m} minuti`;
+}
+tick(); setInterval(tick, 30000);
+
+/* ===== RSVP arena ===== */
+const arena = $('arena'), ghost = $('ghost'), spider = $('spider'), taunt = $('taunt'), nameEl = $('name');
+function clearNameMsg(){ if (nameMsgShown) { taunt.textContent = ''; nameMsgShown = false; delete taunt.dataset.kind; } }
+nameEl.addEventListener('input', clearNameMsg);
+let escapes = 0, ghostTimer = null;
+const SPIDER_ESCAPES = 5;
+const taunts = ['Mancato! Sei occhi ti hanno visto arrivare da Chiasso.', 'Tre teste, e nessuna ha voglia di sentirti dire di no.', 'Cerbero sbrana i golosi. Tu sei solo lento.', 'Tre teste e quattro zampe. Tu due gambe e zero scuse.', 'E va bene, hai vinto. Ma agli ignavi qualcuno deve pur dare la caccia…'];
+
+function rand(min, max){ return min + Math.random() * (max - min); }
+function place(el, x, y){ el.style.left = x + 'px'; el.style.top = y + 'px'; }
+function moveGhost(){
+  const w = arena.clientWidth, h = arena.clientHeight;
+  place(ghost, rand(8, Math.max(8, w - 124)), rand(10, Math.max(10, h - 110)));
+}
+function placeSpider(far){
+  const w = arena.clientWidth, h = arena.clientHeight;
+  const cx = parseFloat(spider.style.left) || 0, cy = parseFloat(spider.style.top) || 0;
+  let x, y, tries = 0;
+  do { x = rand(8, Math.max(8, w - 120)); y = rand(20, Math.max(20, h - 100)); tries++; }
+  while (far && Math.hypot(x - cx, y - cy) < Math.min(w, h) * .5 && tries < 30);
+  place(spider, x, y);
+}
+function resetArena(){
+  escapes = 0; taunt.textContent = '';
+  const w = arena.clientWidth;
+  place(ghost, w * .08, 70);
+  place(spider, Math.max(8, w * .6), 150);
+  clearInterval(ghostTimer);
+  ghostTimer = setInterval(moveGhost, 2600);
+  setTimeout(moveGhost, 300);
+}
+const nameMsgs = {
+  si: ['Caronte ti porta dentro volentieri… ma Minosse deve sapere chi sei. Scrivi il tuo nome.', 'Un nome, per favore. Caronte non traghetta gli sconosciuti.'],
+  no: ['Vuoi andartene senza dire chi sei? Cerbero fiuta ogni faccia. Scrivi il tuo nome.', 'Nessuno sparisce nell\'anonimato da qui. Il nome. Adesso.']
+};
+let nameMsgShown = false; const nameTries = { si: 0, no: 0 };
+function needName(kind){
+  const n = nameEl.value.trim();
+  if (n) return n;
+  nameEl.classList.remove('shake'); void nameEl.offsetWidth; nameEl.classList.add('shake');
+  nameEl.focus({ preventScroll: true });
+  const list = nameMsgs[kind] || nameMsgs.si;
+  const tries = nameTries[kind] || 0;
+  nameTries[kind] = tries + 1;
+  taunt.textContent = list[tries % list.length];
+  taunt.dataset.kind = kind;
+  nameMsgShown = true;
+  if (kind === 'no') { blip(140); buzz([120, 60, 120]); }
+  return null;
+}
+function spiderEscape(){
+  blip(900);
+  taunt.textContent = taunts[escapes] || '';
+  escapes++;
+  placeSpider(true);
+}
+spider.addEventListener('pointerdown', (e) => {
+  e.preventDefault();
+  if (!needName('no')) return;
+  if (escapes < SPIDER_ESCAPES) spiderEscape(); else choose('no');
+});
+spider.addEventListener('pointerenter', (e) => {
+  if (e.pointerType === 'mouse' && escapes < SPIDER_ESCAPES && nameEl.value.trim()) spiderEscape();
+});
+spider.addEventListener('click', (e) => {
+  if (e.detail !== 0) return; // keyboard only; pointer is handled above
+  if (!needName('no')) return;
+  if (escapes < SPIDER_ESCAPES) spiderEscape(); else choose('no');
+});
+ghost.addEventListener('click', () => { if (needName('si')) choose('si'); });
+
+async function sendRsvp(name, answer){
+  if (!SCRIPT_URL) return true;
+  try {
+    await fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ name, answer }) });
+    return true;
+  } catch(e){
+    try { // fallback: fire-and-forget without reading the reply
+      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ name, answer }) });
+      return true;
+    } catch(e2){ return false; }
+  }
+}
+
+async function choose(answer){
+  const name = nameEl.value.trim(); if (!name) return;
+  clearInterval(ghostTimer);
+  save({ name, answer, sent: false });
+  showStatus();
+  if (answer === 'si') showParty(name); else showScare(name);
+  const ok = await sendRsvp(name, answer);
+  save({ sent: ok });
+  showStatus();
+}
+
+function showStatus(){
+  const s = load();
+  if (!s.answer) { $('rsvp-form').hidden = false; $('rsvp-status').hidden = true; return; }
+  $('rsvp-form').hidden = true; $('rsvp-status').hidden = false;
+  const t = $('status-text');
+  t.textContent = '';
+  const strong = document.createElement('strong');
+  strong.textContent = s.answer === 'si' ? 'Varcherai la porta.' : 'Resterai fuori.';
+  t.append(strong, ' ', s.answer === 'si'
+    ? `${s.name}, sei tra i dannati. Sabato 31 alle 19:00, vestito del tuo peccato.`
+    : `${s.name}, peccato. Se cambi idea basta un tocco qui sotto.`);
+  const err = $('status-err');
+  if (s.sent === false && SCRIPT_URL) {
+    err.hidden = false;
+    err.textContent = 'La risposta non è arrivata. Controlla la connessione e tocca "Invia di nuovo".';
+    $('change').textContent = 'Invia di nuovo';
+  } else {
+    err.hidden = true;
+    $('change').textContent = 'Cambia risposta';
+  }
+}
+$('change').addEventListener('click', async () => {
+  const s = load();
+  if (s.sent === false && SCRIPT_URL && s.answer) {
+    const ok = await sendRsvp(s.name, s.answer);
+    save({ sent: ok }); showStatus(); return;
+  }
+  save({ answer: null });
+  nameEl.value = s.name || '';
+  showStatus(); resetArena();
+});
+
+/* ===== Full-screen moments ===== */
+function showScare(name){
+  const el = $('scare');
+  $('scare-text').textContent = `${name}, chi non viene finisce nel vestibolo con gli ignavi, a correre dietro a un'insegna per l'eternità. Se cambi idea, la porta resta socchiusa.`;
+  el.hidden = false; el.classList.remove('done'); void el.offsetWidth; el.classList.add('go');
+  scream(); buzz([250, 80, 400]);
+  setTimeout(() => { el.classList.add('done'); $('scare-close').focus(); }, reduceMotion ? 300 : 1700);
+}
+$('scare-close').addEventListener('click', () => { const el = $('scare'); el.hidden = true; el.classList.remove('go', 'done'); });
+function showParty(name){
+  $('party-title').textContent = `Benvenuto all'Inferno, ${name}!`;
+  $('party').hidden = false; organ(); buzz([60, 40, 60]);
+  $('party-close').focus();
+}
+$('party-close').addEventListener('click', () => { $('party').hidden = true; });
+
+/* ===== Bat hunt ===== */
+const field = $('batfield');
+const BAT_SVG = '<svg viewBox="0 0 64 52" aria-hidden="true"><g class="wings" fill="#1a0605"><path d="M24 22C16 10 6 8 0 12c5 2 7 6 7 10 3-2 7-2 9 1 2-2 5-2 8-1z"/><path d="M40 22c8-12 18-14 24-10-5 2-7 6-7 10-3-2-7-2-9 1-2-2-5-2-8-1z"/></g><path d="M38 38c6 4 10 6 14 4l-2 6 5-2" stroke="#c4401d" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M24 12l-3-9 7 6zM40 12l3-9-7 6z" fill="#2a0a06"/><circle cx="32" cy="24" r="12" fill="#c4401d"/><path d="M26 22l4 2M38 22l-4 2" stroke="#1a0605" stroke-width="2" stroke-linecap="round"/><circle cx="28" cy="25" r="1.8" fill="#ffd27a"/><circle cx="36" cy="25" r="1.8" fill="#ffd27a"/><path d="M27 30q5 4 10 0" stroke="#1a0605" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M28 31l1 2 1-2M34 31l1 2 1-2" fill="#fff"/></svg>';
+const GOAL = 7, TIME = 10;
+let bats = [], hits = 0, endAt = 0, raf = 0, running = false, lastT = 0;
+
+function spawnBat(b){
+  const w = field.clientWidth, h = field.clientHeight;
+  b.x = rand(0, w - 72); b.y = rand(30, h - 56);
+  const a = rand(0, Math.PI * 2), sp = rand(120, 190);
+  b.vx = Math.cos(a) * sp; b.vy = Math.sin(a) * sp;
+  b.turn = rand(.4, 1);
+  b.el.classList.remove('hit'); b.el.classList.add('flap'); b.dead = false;
+}
+function makeBats(){
+  bats.forEach((b) => b.el.remove());
+  bats = [];
+  for (let i = 0; i < 3; i++){
+    const el = document.createElement('button');
+    el.className = 'bat flap'; el.innerHTML = BAT_SVG; el.setAttribute('aria-label', 'Diavoletto');
+    const b = { el };
+    const hit = (e) => { e.preventDefault(); if (!running || b.dead) return; b.dead = true; hits++; el.classList.add('hit'); blip(500); buzz(30); updateHud(); if (hits >= GOAL) return win(); setTimeout(() => { if (running) spawnBat(b); }, 180); };
+    el.addEventListener('pointerdown', hit);
+    el.addEventListener('click', (e) => { if (e.detail === 0) hit(e); });
+    field.appendChild(el); spawnBat(b); bats.push(b);
+  }
+}
+function updateHud(){
+  $('hud-hits').textContent = `${hits}/${GOAL}`;
+  $('hud-time').textContent = `${Math.max(0, (endAt - performance.now()) / 1000).toFixed(1)} s`;
+}
+function loop(t){
+  const dt = Math.min(.05, (t - lastT) / 1000); lastT = t;
+  const w = field.clientWidth, h = field.clientHeight;
+  bats.forEach((b) => {
+    if (b.dead) return;
+    b.turn -= dt;
+    if (b.turn <= 0){ const a = rand(0, Math.PI * 2), sp = rand(120, 200); b.vx = Math.cos(a) * sp; b.vy = Math.sin(a) * sp; b.turn = rand(.4, 1); }
+    b.x += b.vx * dt; b.y += b.vy * dt;
+    if (b.x < 0){ b.x = 0; b.vx = Math.abs(b.vx); } if (b.x > w - 72){ b.x = w - 72; b.vx = -Math.abs(b.vx); }
+    if (b.y < 28){ b.y = 28; b.vy = Math.abs(b.vy); } if (b.y > h - 56){ b.y = h - 56; b.vy = -Math.abs(b.vy); }
+    b.el.style.transform = `translate(${b.x}px, ${b.y}px) scaleX(${b.vx < 0 ? -1 : 1})`;
+  });
+  updateHud();
+  if (performance.now() >= endAt) return lose();
+  raf = requestAnimationFrame(loop);
+}
+function startHunt(){
+  audio();
+  hits = 0; running = true; endAt = performance.now() + TIME * 1000; lastT = performance.now();
+  $('bat-msg').hidden = true; $('hud').hidden = false;
+  makeBats(); updateHud();
+  raf = requestAnimationFrame(loop);
+}
+function stopHunt(){ running = false; cancelAnimationFrame(raf); bats.forEach((b) => b.el.remove()); bats = []; $('hud').hidden = true; }
+function lose(){
+  stopHunt();
+  $('bat-msg-text').textContent = `Ne hai presi ${hits} su ${GOAL}. I diavoletti ridono di te. Riprova.`;
+  $('bat-start').textContent = 'Riprova';
+  $('bat-msg').hidden = false;
+}
+function win(){
+  stopHunt(); organ();
+  save({ unlocked: true });
+  field.hidden = true;
+  loadGuests();
+}
+$('bat-start').addEventListener('click', startHunt);
+$('bat-again').addEventListener('click', () => {
+  $('guests').hidden = true; field.hidden = false;
+  $('bat-msg-text').textContent = 'Di nuovo? I diavoletti sono veloci e cambiano direzione.';
+  $('bat-start').textContent = 'Inizia la caccia'; $('bat-msg').hidden = false;
+  field.scrollIntoView({ block: 'center', behavior: 'smooth' });
+});
+
+async function loadGuests(){
+  const box = $('guests'); box.hidden = false;
+  const count = $('guest-count'), list = $('guest-list'), note = $('guest-note');
+  list.textContent = ''; note.textContent = '';
+  if (!SCRIPT_URL){
+    const s = load();
+    const names = s.answer === 'si' && s.name ? [s.name] : [];
+    count.textContent = names.length === 1 ? '1 anima ha varcato la porta' : `${names.length} anime hanno varcato la porta`;
+    names.forEach((n) => { const li = document.createElement('li'); li.textContent = n; list.appendChild(li); });
+    note.textContent = 'Modalità prova: qui vedi solo la tua risposta. La lista vera comparirà quando la pagina sarà collegata al foglio delle risposte.';
+    return;
+  }
+  count.textContent = 'Sto aprendo il registro di Minosse…';
+  try {
+    const r = await fetch(SCRIPT_URL + '?t=' + Date.now());
+    const data = await r.json();
+    const yes = Array.isArray(data.yes) ? data.yes : [];
+    count.textContent = yes.length === 1 ? '1 anima ha varcato la porta' : `${yes.length} anime hanno varcato la porta`;
+    if (!yes.length) note.textContent = 'Ancora nessuno. Sii il primo dannato.';
+    yes.forEach((n) => { const li = document.createElement('li'); li.textContent = n; list.appendChild(li); });
+    if (data.noCount) note.textContent = `${data.noCount} ${data.noCount === 1 ? 'ignavo non verrà' : 'ignavi non verranno'}.`;
+  } catch(e){
+    count.textContent = 'Il registro è sigillato.';
+    note.textContent = 'Non riesco a caricare la lista adesso. Riprova tra poco.';
+  }
+}
+
+/* ===== Start ===== */
+(function init(){
+  const s = load();
+  if (s.name) nameEl.value = s.name;
+  showStatus();
+  requestAnimationFrame(resetArena);
+  if (s.unlocked){ field.hidden = true; loadGuests(); }
+})();
+</script>
+</body>
+</html>
